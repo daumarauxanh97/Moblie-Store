@@ -334,6 +334,7 @@ class Home_model extends PDODriver
 	}
 	public function Fullpanigate($currentPage=-1,$table="",$hang_sx="",$sap_xep="",$min="",$max="")
 	{
+		// echo "huydz".$hang_sx;die();
 	  $total = $this->getAllDataTable($table);
 	  $totalRecord = count($total);
 	  $totalPage = ceil($totalRecord/3);
@@ -365,7 +366,10 @@ class Home_model extends PDODriver
 	      }
 	     $html .= "</ul>";
 	     $html .= "</nav>";
+ 
 	     $phone= $this->allProduct($table,$hang_sx,$sap_xep,$min,$max,$start,3);
+	     // echo "<pre>";
+	     // print_r($phone);die();
 	     return array('pageHTML' => $html,
 	        'dataphone'=>$phone
 	      );
@@ -725,13 +729,15 @@ class Home_model extends PDODriver
 	}*/
 	public function allProduct($table,$hang_sx="",$sap_xep="",$min="",$max="",$start,$limit)
 	{
+		//die($table.$hang_sx.$sap_xep.$min.$max.$start.$limit);
         $data=[];
-        if($hang_sx=="")
+        if($hang_sx=="" && $sap_xep !="" && $min!="" && $max!=""  )
         {
+
 	        	$sql ="SELECT *  FROM  {$table} where gia>=:min and gia<=:max order by gia :sap_xep limit :start,:limmit";
 	        	$stmt = $this->db->prepare($sql);
 			if ($stmt) {
-				$stmt->bindPaRam(':sap_xep',$min,PDO::PARAM_INT);
+				$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
 				$stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
 				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
 				$stmt->bindPaRam(':start',$start,PDO::PARAM_INT);
@@ -744,31 +750,33 @@ class Home_model extends PDODriver
 				}
 				$stmt->closeCursor();
 			}
-        }
-        elseif ($sap_xep=="") {
+        } 
+        if ($sap_xep=="" && $hang_sx!="" && $min!="" && $max!="" ) {
+        	//die("Hello World");
 	        	$sql ="SELECT *  FROM  {$table}  as a inner join hang_sx as b where a.id_sx=b.id and b.name =:hang_sx and gia>=:min and gia<=:max order by gia limit :start,:limmit";
 	        	$stmt = $this->db->prepare($sql);
 			if ($stmt) {
-				$stmt->bindPaRam(':hang_sx',$min,PDO::PARAM_INT);
+				$stmt->bindPaRam(':hang_sx',$hang_sx,PDO::PARAM_STR);
 				$stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
 				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
 				$stmt->bindPaRam(':start',$start,PDO::PARAM_INT);
 				$stmt->bindPaRam(':limmit',$limit,PDO::PARAM_INT);
 				if ($stmt->execute()) 
 				{
-					if ($stmt->rowCount()>0) {
+					if ($stmt->rowCount()>0) {die($sql);
 						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
 					}
 				}
 				$stmt->closeCursor();
 			}
         }
-        elseif ($min=="" && $max=="") {
+        if ($min=="" && $max=="" && $sap_xep!="" && $hang_sx!="" ) {
+
         	$sql ="SELECT *  FROM  {$table}  as a inner join hang_sx as b where a.id_sx=b.id and b.name =:hang_sx order by gia :sap_xep limit :start,:limmit";
         	$stmt = $this->db->prepare($sql);
 			if ($stmt) {
-				$stmt->bindPaRam(':hang_sx',$min,PDO::PARAM_INT);
-				$stmt->bindPaRam(':sap_xep',$min,PDO::PARAM_INT);
+				$stmt->bindPaRam(':hang_sx',$hang_sx,PDO::PARAM_STR);
+				$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
 				$stmt->bindPaRam(':start',$start,PDO::PARAM_INT);
 				$stmt->bindPaRam(':limmit',$limit,PDO::PARAM_INT);
 				if ($stmt->execute()) 
@@ -780,7 +788,7 @@ class Home_model extends PDODriver
 				$stmt->closeCursor();
 			}
         }
-        elseif ($hang_sx=="" && $sap_xep=="") {
+        if ($hang_sx=="" && $sap_xep==""  && $min!="" && $max!="" ) {
         	$sql ="SELECT *  FROM  {$table} where gia>=:min and gia<=:max order by gia  limit :start,:limmit";
         	$stmt = $this->db->prepare($sql);
 			if ($stmt) {
@@ -797,11 +805,11 @@ class Home_model extends PDODriver
 				$stmt->closeCursor();
 			}
         }
-        elseif ($hang_sx=="" && $min=="" && $max=="") {
+        if ($hang_sx=="" && $min=="" && $max==""  && $sap_xep!="" ) {
         	$sql ="SELECT *  FROM  {$table} order by gia :sap_xep limit :start,:limmit";
         	$stmt = $this->db->prepare($sql);
 			if ($stmt) {
-				$stmt->bindPaRam(':sap_xep',$min,PDO::PARAM_INT);
+				$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
 				$stmt->bindPaRam(':start',$start,PDO::PARAM_INT);
 				$stmt->bindPaRam(':limmit',$limit,PDO::PARAM_INT);
 				if ($stmt->execute()) 
@@ -813,11 +821,11 @@ class Home_model extends PDODriver
 				$stmt->closeCursor();
 			}
         }
-        elseif ($sap_xep=="" && $min=="" && $max=="") {
+        if ($sap_xep=="" && $min=="" && $max=="" && $hang_sx!="") {
         	$sql ="SELECT *  FROM  {$table}  as a inner join hang_sx as b where a.id_sx=b.id and b.name =:hang_sx  order by gia limit :start,:limmit";
         	$stmt = $this->db->prepare($sql);
 			if ($stmt) {
-				$stmt->bindPaRam(':hang_sx',$min,PDO::PARAM_INT);
+				$stmt->bindPaRam(':hang_sx',$hang_sx,PDO::PARAM_STR);
 				$stmt->bindPaRam(':start',$start,PDO::PARAM_INT);
 				$stmt->bindPaRam(':limmit',$limit,PDO::PARAM_INT);
 				if ($stmt->execute()) 
@@ -829,7 +837,7 @@ class Home_model extends PDODriver
 				$stmt->closeCursor();
 			}
         }
-        elseif ($hang_sx=="" && $sap_xep=="" && $min=="" && $max=="") {
+        if ($hang_sx=="" && $sap_xep=="" && $min=="" && $max=="" ) {
         	$sql ="SELECT *  FROM  {$table}  limit :start,:limmit";
 	        $stmt = $this->db->prepare($sql);
 			if ($stmt) {
@@ -848,8 +856,8 @@ class Home_model extends PDODriver
         	$sql ="SELECT *  FROM  {$table}  as a inner join hang_sx as b where a.id_sx=b.id and b.name =:hang_sx and gia>=:min and gia<=:max order by gia :sap_xep limit :start,:limmit";
         	$stmt = $this->db->prepare($sql);
 			if ($stmt) {
-				$stmt->bindPaRam(':hang_sx',$min,PDO::PARAM_INT);
-				$stmt->bindPaRam(':sap_xep',$min,PDO::PARAM_INT);
+				$stmt->bindPaRam(':hang_sx',$hang_sx,PDO::PARAM_STR);
+				$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
 				$stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
 				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
 				$stmt->bindPaRam(':start',$start,PDO::PARAM_INT);

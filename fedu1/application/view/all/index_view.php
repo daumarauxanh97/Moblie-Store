@@ -260,8 +260,8 @@
   </div>
    <hr style="font-size: 2px;">
    <div class="product-content container">
-  <!-- <?php echo "<pre>"; print_r($data['phone']); die;?> -->
-  <?php foreach($data['phone'] as $key => $phone): ?>
+
+  <?php foreach($data['allPhone'] as $key => $phone): ?>
       <div class="col-md-4 " style="">
       <a href="?c=product&m=detail&id_phone=<?php echo $phone['id'];?>"><img src="uploads/images/<?php echo $phone['images'];?>" style="width: 200px;height: auto;"></a>
       <a href="?c=product&m=detail&id_phone=<?php echo $phone['id'];?>"><p><?php echo $phone['phone_name'];?></p>

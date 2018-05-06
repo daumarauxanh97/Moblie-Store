@@ -15,7 +15,7 @@ class all extends MY_Controller
 	}
 	public function index()
 	{
-		$id_sxp=$_GET['hang_sxp']?? '';
+		$id_sxp=$_GET['hang_sxp']?? '';//
 		$id_sxpp =$_GET['hang_sxpp']?? '';
 		$id_sxl=$_GET['hang_sxl']?? '';
 		$id_sxll=$_GET['hang_sxll']?? '';
@@ -24,8 +24,8 @@ class all extends MY_Controller
 		$data=[];
 		// $data['allPhone']=$this->_homeModel->getAllDataPhone();
 		// $data['allLaptop']=$this->_homeModel->getAllDataLatop();
-		$data['allHangSXLaptop']=$this->_homeModel->getAllDataSXLaptop();
-        $data['allHangSXPhone']=$this->_homeModel->getAllDataSXPhone();
+		// $data['allHangSXLaptop']=$this->_homeModel->getAllDataSXLaptop();
+  //       $data['allHangSXPhone']=$this->_homeModel->getAllDataSXPhone();
         // $data['allPhoneHangSX']=$this->_homeModel->getAllPhoneHang_sx($id_sxp);
         // $data['allLaptopHangSX']=$this->_homeModel->getAllLaptopHang_sx($id_sxl);
         
@@ -49,12 +49,14 @@ class all extends MY_Controller
   //       print_r($data['allPhone']);
   //       die();
         
-        $page = $_GET['page'] ?? '';
-		$data['phone']=$this->_homeModel->Fullpanigate($page,$phone,$id_sxpp,$sap_xep,$id_min,$id_max);
+        $page = $_GET['page'] ?? "";
+        // die($id_sxp);
+		$data['phone']=$this->_homeModel->Fullpanigate($page,$phone,$id_sxp,$sap_xep,$id_min,$id_max);
+		//echo "<pre/>";print_r($data['phone']);die();
 		$data['allPhone']=$data['phone']['dataphone'];
 		$data['page']=$data['phone']['pageHTML'];
 		$page = $_GET['page'] ?? '';
-		$data['laptop']=$this->_homeModel->Fullpanigate($page,$laptop,$id_sxll,$sap_xep,$id_min,$id_max);
+		$data['laptop']=$this->_homeModel->Fullpanigate($page,$laptop,$id_sxl,$sap_xep,$id_min,$id_max);
 		$data['allLaptop']=$data['phone']['dataphone'];
 		$data['page']=$data['laptop']['pageHTML'];
 		//phan trang cho sp laptop
