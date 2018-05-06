@@ -1,0 +1,25 @@
+*{margin: 0;padding: 0;border: 0;}
+body
+{
+	width: 100%;
+	background-color: rgb(243, 243, 243);
+}
+header
+{
+	width: 100%;
+}
+.container
+{
+	width: 1200px;
+	margin: auto;
+}
+.head-detail
+{
+	display: inline-block;
+}
+.product-detail
+{
+	width: 1200px;
+	height: 1100px;
+	background-color: white;
+}
