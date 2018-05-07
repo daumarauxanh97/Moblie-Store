@@ -15,13 +15,13 @@ class all extends MY_Controller
 	}
 	public function index()
 	{
-		$id_min=$_GET['min']?? '';
-		$id_max=$_GET['max']?? '';
+		$id_min=$_GET['min']?? 0;
 		$id_sx=$_GET['hang_sx']?? '';
 		$id_table=$_GET['table']?? '';//
+		$id_max=$_GET['max']?? $this->_homeModel->getMax($id_table)["gia"];
 		$data=[];
 		$data['allHangSX']=$this->_homeModel->getAllDataSXTable($id_table);
-        $sap_xep=$_GET['sap_xep']?? '';;
+        $sap_xep=$_GET['sap_xep'] ?? "DESC";
         // echo $sap_xep;
         // die();
        //phan trang cho sp     
