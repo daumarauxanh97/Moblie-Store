@@ -21,11 +21,13 @@ class all extends MY_Controller
 		$id_sxll=$_GET['hang_sxll']?? '';
 		$id_min=$_GET['min']?? '';
 		$id_max=$_GET['max']?? '';
+		$id_sx=$_GET['hang_sx']?? '';
+		$id_table=$_GET['table']?? '';//
 		$data=[];
 		// $data['allPhone']=$this->_homeModel->getAllDataPhone();
 		// $data['allLaptop']=$this->_homeModel->getAllDataLatop();
-		// $data['allHangSXLaptop']=$this->_homeModel->getAllDataSXLaptop();
-  //       $data['allHangSXPhone']=$this->_homeModel->getAllDataSXPhone();
+		$data['allHangSX']=$this->_homeModel->getAllDataSXTable($id_table);
+        // $data['allHangSXPhone']=$this->_homeModel->getAllDataSXPhone();
         // $data['allPhoneHangSX']=$this->_homeModel->getAllPhoneHang_sx($id_sxp);
         // $data['allLaptopHangSX']=$this->_homeModel->getAllLaptopHang_sx($id_sxl);
         
@@ -40,32 +42,17 @@ class all extends MY_Controller
         // $view='view';
         // $desc='desc';
 
-        //phan trang cho sp phone
-  //       $page = $_GET['page'] ?? '';
-		// $data['phone']=$this->_homeModel->panigate($page,$phone);
-		// $data['allPhone']=$data['phone']['dataphone'];
-		// $data['page']=$data['phone']['pageHTML'];
-		// echo "<pre>";
-  //       print_r($data['allPhone']);
-  //       die();
-        
+        //phan trang cho sp phone        
         $page = $_GET['page'] ?? "";
-        // die($id_sxp);
-		$data['phone']=$this->_homeModel->Fullpanigate($page,$phone,$id_sxp,$sap_xep,$id_min,$id_max);
-		//echo "<pre/>";print_r($data['phone']);die();
+		$data['phone']=$this->_homeModel->Fullpanigate($page,$id_table,$id_sx,$sap_xep,$id_min,$id_max);
 		$data['allPhone']=$data['phone']['dataphone'];
 		$data['page']=$data['phone']['pageHTML'];
-		$page = $_GET['page'] ?? '';
-		$data['laptop']=$this->_homeModel->Fullpanigate($page,$laptop,$id_sxl,$sap_xep,$id_min,$id_max);
-		$data['allLaptop']=$data['phone']['dataphone'];
-		$data['page']=$data['laptop']['pageHTML'];
-		//phan trang cho sp laptop
-		// $data['laptop']=$this->_homeModel->panigate($page,$laptop);
-		// $data['allLaptop']=$data['laptop']['dataphone'];
-		// $data['page1']=$data['laptop']['pageHTML'];
-		// echo "<pre>";
-  //       print_r($data['allLaptop']);
-  //       die();
+		////phan trang cho sp laptop  
+		// $page = $_GET['page'] ?? '';
+		// $data['laptop']=$this->_homeModel->Fullpanigate($page,$id_table,$id_sxl,$sap_xep,$id_min,$id_max);
+		// $data['allLaptop']=$data['phone']['dataphone'];
+		// $data['page']=$data['laptop']['pageHTML'];
+		
 
 		//phan trang cho sp  theo hang sx
 		// $data['phoneApple']=$this->_homeModel->panigate1($page,$phone,$id_sxp);

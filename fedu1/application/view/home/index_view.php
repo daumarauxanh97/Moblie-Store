@@ -157,22 +157,22 @@
    <div class="menu-content">
      <ul>
     <li>
-      <a href="?c=all&m=index&hang_sxp=Apple">Apple</a>
+      <a href="?c=all&m=index&table=phone&hang_sx=Apple">Apple</a>
     </li>
     <li>
-      <a href="?c=all&m=index&hang_sxp=Samsung">Samsung</a> 
+      <a href="?c=all&m=index&table=phone&hang_sx=Samsung">Samsung</a> 
     </li>
     <li>
-      <a href="?c=all&m=index&hang_sxp=Oppo">Oppo</a>
+      <a href="?c=all&m=index&table=phone&hang_sx=Oppo">Oppo</a>
     </li>
     <li>
-      <a href="?c=all&m=index&hang_sxp=Nokia">Nokia</a>
+      <a href="?c=all&m=index&table=phone&hang_sx=Nokia">Nokia</a>
     </li>
     <li>
-      <a href="?c=all&m=index&hang_sxp=Xiaomi">Xiaomi</a>
+      <a href="?c=all&m=index&table=phone&hang_sx=Xiaomi">Xiaomi</a>
     </li>
     <li>
-      <a href="?c=all&m=index&hang_sxp=Asus">Asus</a>
+      <a href="?c=all&m=index&table=phone&hang_sx=Asus">Asus</a>
     </li>
     <li>
       <a href="">Giá từ thấp đến cao</a>
@@ -203,22 +203,22 @@
 <div class="menu-content"> 
   <ul>
     <li>
-      <a href="?c=all&m=index&hang_sxl=Apple">Apple</a>
+      <a href="?c=all&m=index&table=laptop&hang_sx=Apple">Apple</a>
     </li>
     <li>
-      <a href="?c=all&m=index&hang_sxl=Asus">Asus</a> 
+      <a href="?c=all&m=index&table=laptop&hang_sx=Asus">Asus</a> 
     </li>
     <li>
-      <a href="?c=all&m=index&hang_sxl=Dell">Dell</a>
+      <a href="?c=all&m=index&table=laptop&hang_sx=Dell">Dell</a>
     </li>
     <li>
-      <a href="?c=all&m=index&hang_sxl=Lenovo">Lenovo</a>
+      <a href="?c=all&m=index&table=laptop&hang_sx=Lenovo">Lenovo</a>
     </li>
     <li>
-      <a href="?c=all&m=index&hang_sxl=Acer">Acer</a>
+      <a href="?c=all&m=index&table=laptop&hang_sx=Acer">Acer</a>
     </li>
     <li>
-      <a href="?c=all&m=index&hang_sxl=Hp">Hp</a>
+      <a href="?c=all&m=index&table=laptop&hang_sx=Hp">Hp</a>
     </li>
     <li>
       <a href="">Giá từ thấp đến cao</a>

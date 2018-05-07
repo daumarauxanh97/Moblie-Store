@@ -154,11 +154,11 @@ class Home_model extends PDODriver
 		return $data;
 	}
 
-	public function getAllDataSXPhone()
+	public function getAllDataSXTable($table)
 	{
 
 		$data=[];
-		$sql ="SELECT DISTINCT name FROM hang_sx as a inner join phone as b where b.id_sx=a.id ";
+		$sql ="SELECT DISTINCT name FROM hang_sx as a inner join {$table} as b where b.id_sx=a.id ";
 		$stmt = $this->db->prepare($sql);
 		if ($stmt) {
 			if ($stmt->execute()) 
@@ -175,26 +175,26 @@ class Home_model extends PDODriver
 		return $data;
 	}
 
-	public function getAllDataSXLaptop()
-	{
+	// public function getAllDataSXLaptop()
+	// {
 
-		$data=[];
-		$sql ="SELECT DISTINCT name FROM hang_sx as a inner join laptop as b where b.id_sx=a.id ";
-		$stmt = $this->db->prepare($sql);
-		if ($stmt) {
-			if ($stmt->execute()) 
-			{
-				if ($stmt->rowCount()>0) {
-					$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
-				}
-			}
-			$stmt->closeCursor();
-		}
-		// echo "<pre>";
-		// print_r($data);
-		// die();
-		return $data;
-	}
+	// 	$data=[];
+	// 	$sql ="SELECT DISTINCT name FROM hang_sx as a inner join laptop as b where b.id_sx=a.id ";
+	// 	$stmt = $this->db->prepare($sql);
+	// 	if ($stmt) {
+	// 		if ($stmt->execute()) 
+	// 		{
+	// 			if ($stmt->rowCount()>0) {
+	// 				$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+	// 			}
+	// 		}
+	// 		$stmt->closeCursor();
+	// 	}
+	// 	// echo "<pre>";
+	// 	// print_r($data);
+	// 	// die();
+	// 	return $data;
+	// }
 
 	public function getAllLaptopHang_sx($ten)
 	{
@@ -335,9 +335,11 @@ class Home_model extends PDODriver
 	public function Fullpanigate($currentPage=-1,$table="",$hang_sx="",$sap_xep="",$min="",$max="")
 	{
 		// echo "huydz".$hang_sx;die();
+
 	  $total = $this->getAllDataTable($table);
 	  $totalRecord = count($total);
 	  $totalPage = ceil($totalRecord/3);
+	  //die( $totalPage);
 	  if($currentPage <= 0) 
 	  {
 	   $currentPage =1;
@@ -351,7 +353,7 @@ class Home_model extends PDODriver
 	  $html .= "<ul class='pagination phantrang' >";
 	  $html .= "";
 
-	  $linkCurrent="?c=all&m=index&loai_sp=".$table.$hang_sx.$sap_xep.$min.$max."&page={page}";
+	  $linkCurrent="?c=all&m=index&loai_sp=".$table."&hang_sx=".$hang_sx."$sap_xep=".$sap_xep."$min=".$min."$max=".$max."&page={page}";
 	  if($currentPage > 1 && $currentPage <= $totalPage)
 	     {
 	         $html .= "<li style='list-style:none; display:inline-block; padding-left:25px;'><a href='".str_replace('{page}', ($currentPage-1), $linkCurrent)."' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>";
@@ -368,8 +370,10 @@ class Home_model extends PDODriver
 	     $html .= "</nav>";
  
 	     $phone= $this->allProduct($table,$hang_sx,$sap_xep,$min,$max,$start,3);
-	     // echo "<pre>";
-	     // print_r($phone);die();
+	     //echo "<pre>";
+	     //print_r($phone);die();
+	     //$phone4= count($phone);
+	  	 //die($phone4);
 	     return array('pageHTML' => $html,
 	        'dataphone'=>$phone
 	      );
@@ -763,7 +767,8 @@ class Home_model extends PDODriver
 				$stmt->bindPaRam(':limmit',$limit,PDO::PARAM_INT);
 				if ($stmt->execute()) 
 				{
-					if ($stmt->rowCount()>0) {die($sql);
+					// die($sql);
+					if ($stmt->rowCount()>0) {
 						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
 					}
 				}
@@ -798,7 +803,8 @@ class Home_model extends PDODriver
 				$stmt->bindPaRam(':limmit',$limit,PDO::PARAM_INT);
 				if ($stmt->execute()) 
 				{
-					if ($stmt->rowCount()>0) {
+					//die($sql);
+					if($stmt->rowCount()>0) {
 						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
 					}
 				}
