@@ -133,10 +133,8 @@ class Home_model extends PDODriver
         return $this->insert($table,$data);
 	}
 
-	public function getAllDataTable($table,$hang_sx="",$sap_xep="",$min=0,$maxhuy=30000000)
+	public function getAllDataTable($table,$hang_sx="",$sap_xep="",$min="",$maxhuy="")
 	{
-		$maxhuy=30000000;
-        die($maxhuy);
 		$data=[];
 		$hang_sx="%".$hang_sx."%";
 		$sql="SELECT * FROM {$table} as a inner join hang_sx as b where a.id_sx=b.id and b.name like :hang_sx and gia>=0 and gia<=:max order by gia ";
@@ -155,8 +153,6 @@ class Home_model extends PDODriver
 				}
 				$stmt->closeCursor();
 			}
-        print_r($data);
-        die($hang_sx.$max);
 		return $data;
 	}
 
@@ -180,7 +176,6 @@ class Home_model extends PDODriver
 		// die();
 		return $data;
 	}
-
 
 
 	public function getAllLimit($table,$start,$limit)
@@ -207,8 +202,6 @@ class Home_model extends PDODriver
 	}
 	public function Fullpanigate($currentPage=-1,$table="",$hang_sx="",$sap_xep="",$min="",$max="")
 	{
-		// echo "huydz".$hang_sx;die();
-
 	  $total = $this->getAllDataTable($table,$hang_sx,$sap_xep,$min,$max);
 	  $totalRecord = count($total);
 	  $totalPage = ceil($totalRecord/3);
