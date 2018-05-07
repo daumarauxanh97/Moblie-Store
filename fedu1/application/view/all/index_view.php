@@ -43,7 +43,11 @@
     <span class="carousel-control-next-icon"></span>
   </a>
 </div>
+<<<<<<< HEAD
 <!-- -->
+=======
+<?php $currentLocation=$_SERVER['REQUEST_URI'];?>
+>>>>>>> 5e7eb76c66806b3265804c3cbbbfcee1943ce449
 <div class="side-bar ">
 	<div class="head-side-bar ">
 		<p>Danh mục</p>
@@ -53,7 +57,7 @@
     <p>Hãng sản xuất</p>
 		<ul>
 		<?php foreach($data['allHangSX'] as $key => $hangSX):?>
-			<li><a href="?c=all&m=index&hang_sxl=<?php echo $hangSX['name']?>">&#187<?php echo $hangSX['name']?></a></li>
+			<li><a href=<?php echo $currentLocation;?>"&hang_sx=<?php echo $hangSX['name']?>">&#187<?php echo $hangSX['name']?></a></li>
 		<?php endforeach;?>
 		</ul>
 	</div>
@@ -61,31 +65,55 @@
   <div class="gia">
     <p>Gia thanh</p>
     <ul>
-      <li><a href="&min=1000000&max=5000000">&#187Từ 1 -> 5 triệu </a></li>
-      <li><a href="?c=all&m=index&loai_spp=laptop&min=5000000&max=10000000">&#187Từ 5 -> 10 triệu</a></li>
-      <li><a href="?c=all&m=index&loai_spp=laptop&min=10000000&max=15000000">&#187Từ 10 -> 15 triệu</a></li>
-      <li><a href="?c=all&m=index&loai_spp=laptop&min=15000000&max=20000000">&#187Từ 15 -> 20 triệu</a></li>
-      <li><a href="?c=all&m=index&loai_spp=laptop&min=20000000&max=25000000">&#187Từ 20 -> 25 triệu</a></li>
-      <li><a href="?c=all&m=index&loai_spp=laptop&min=25000000&max=30000000">&#187Từ 25 -> 30 triệu</a></li>
+    <?php 
+     echo $currentLocation;
+
+    $pieces=explode("&", $currentLocation);
+
+    echo "<pre>";
+    print_r($pieces);
+    die();
+    $currentLocation="";
+      foreach ($pieces as $key => $value) {
+        if(strrpos($value, 'min')!==false||strpos($value, 'max')!==false)
+        {
+            //echo $value;
+        }
+        else
+        {
+            $currentLocation= $currentLocation."&".$value;
+        }
+      }
+
+      echo $currentLocation;
+    ?>
+
+
+      <li><a href="<?php echo $currentLocation;?>&min=1000000&max=5000000">&#187Từ 1 -> 5 triệu </a></li>
+      <li><a href="<?php echo $currentLocation;?>&min=5000000&max=10000000">&#187Từ 5 -> 10 triệu</a></li>
+      <li><a href="<?php echo $currentLocation;?>&min=10000000&max=15000000">&#187Từ 10 -> 15 triệu</a></li>
+      <li><a href="<?php echo $currentLocation;?>&min=15000000&max=20000000">&#187Từ 15 -> 20 triệu</a></li>
+      <li><a href="<?php echo $currentLocation;?>&min=20000000&max=25000000">&#187Từ 20 -> 25 triệu</a></li>
+      <li><a href="<?php echo $currentLocation;?>&min=25000000&max=30000000">&#187Từ 25 -> 30 triệu</a></li>
     </ul>
   </div>
   <hr style="font-size: 2px;">
   <div class="gia">
     <p>Khác</p>
     <ul>
-      <li><a href="?c=all&m=index&loai_spp=laptop&sap_xep=new">&#187Mới nhất</a></li>
-      <li><a href="?c=all&m=index&loai_spp=laptop&sap_xep=view">&#187Xem nhiều</a></li>
-      <li><a href="?c=all&m=index&loai_spp=laptop&sap_xep=asc">&#187Giá từ thấp đến cao</a></li>
-      <li><a href="?c=all&m=index&loai_spp=laptop&sap_xep=desc">&#187Giá từ cao đến thấp</a></li>
+      <li><a href=<?php echo $currentLocation;?>"&sap_xep=new">&#187Mới nhất</a></li>
+      <li><a href=<?php echo $currentLocation;?>"&sap_xep=view">&#187Xem nhiều</a></li>
+      <li><a href=<?php echo $currentLocation;?>"&sap_xep=asc">&#187Giá từ thấp đến cao</a></li>
+      <li><a href=<?php echo $currentLocation;?>"&sap_xep=desc">&#187Giá từ cao đến thấp</a></li>
     </ul>
   </div>
 </div>
 <div class="content">
+
+
+
 </div>
  </div>
-<script type="text/javascript">
-  var currentLocation = window.location;
-</script>
 </body>
 </html>  
 
