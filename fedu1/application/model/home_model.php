@@ -171,7 +171,7 @@ class Home_model extends PDODriver
 				$stmt->closeCursor();
 			}
        // print_r($data);
-        //die($sap_xep);
+        //die($sap_xep);a
 		return $data;
 	}*/
 	public function getAllDataTable($table,$hang_sx="",$sap_xep="",$min,$max)
