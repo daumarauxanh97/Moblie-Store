@@ -53,7 +53,7 @@
    <ul>
      <li>
        <i class="fa fa-mobile" style="color: white;font-size: 30px;margin-right: 5px;cursor: pointer;"></i>
-       <a href="" style="font-size: 20px;">Điện thoại</a>
+       <a href="?c=all&m=index&table=phone" style="font-size: 20px;">Điện thoại</a>
        <i class="fa fa-angle-down" style="color: white;
        font-size: 20px;margin-left: 2px;"></i>
        <div class="drop-menu" >
@@ -62,37 +62,37 @@
              <a href="" style="color: black;font-weight: bold;">Hãng sản xuất</a>
                <ul>
                   <li>
-                    <a href="">Apple</a>
+                    <a href="?c=all&m=index&table=phone&hang_sx=Apple">Apple</a>
                   </li>
                </ul> 
                <ul>
                   <li>
-                    <a href="">Samsung</a>
+                    <a href="?c=all&m=index&table=phone&hang_sx=Samsung">Samsung</a>
                   </li>
                </ul>
                <ul>  
                   <li>
-                    <a href="">Sony</a>
+                    <a href="?c=all&m=index&table=phone&hang_sx=Sony">Sony</a>
                   </li>
               </ul>
               <ul>  
                   <li>
-                    <a href="">Asus</a>
+                    <a href="?c=all&m=index&table=phone&hang_sx=Asus">Asus</a>
                   </li>
               </ul>
               <ul>  
                   <li>
-                    <a href="">Xiaomi</a>
+                    <a href="?c=all&m=index&table=phone&hang_sx=Xiaomi">Xiaomi</a>
                   </li>
               </ul>
               <ul>  
                   <li>
-                    <a href="">Oppo</a>
+                    <a href="?c=all&m=index&table=phone&hang_sx=Oppo">Oppo</a>
                   </li>
               </ul>
               <ul>  
                   <li>
-                    <a href="">Nokia</a>
+                    <a href="?c=all&m=index&table=phone&hang_sx=Nokia">Nokia</a>
                   </li>
               </ul>
             </li>
@@ -100,27 +100,27 @@
              <a href="" style="color: black;font-weight: bold;">Mức giá</a>
                <ul>
                   <li>
-                    <a href="">1->5 triệu</a>
+                    <a href="?c=all&m=index&table=phone&min=1000000&max=5000000">1->5 triệu</a>
                   </li>
                </ul> 
                <ul>
                   <li>
-                    <a href="">5->10 triệu</a>
+                    <a href="?c=all&m=index&table=phone&min=5000000&max=10000000">5->10 triệu</a>
                   </li>
                </ul>
                <ul>  
                   <li>
-                    <a href="">10->15 triệu</a>
+                    <a href="?c=all&m=index&table=phone&min=10000000&max=15000000">10->15 triệu</a>
                   </li>
               </ul>
               <ul>  
                   <li>
-                    <a href="">15->20 triệu</a>
+                    <a href="?c=all&m=index&table=phone&min=15000000&max=20000000">15->20 triệu</a>
                   </li>
               </ul>
               <ul>  
                   <li>
-                    <a href="">20->25 triệu</a>
+                    <a href="/?c=all&m=index&table=phone&min=20000000&max=25000000">20->25 triệu</a>
                   </li>
               </ul>
             </li>
@@ -230,7 +230,7 @@
      </li>
      <li style="margin-left: -7px;">
        <i class="fa fa-laptop" style="color: white;font-size: 30px;margin-right: 5px;cursor: pointer;"></i>
-       <a href="" style="font-size: 20px;">Laptop</a>
+       <a href="?c=all&m=index&table=laptop" style="font-size: 20px;">Laptop</a>
        <i class="fa fa-angle-down" style="color: white;
        font-size: 20px;margin-left: 2px;"></i>
        <div class="drop-menu" >
@@ -239,32 +239,32 @@
              <a href="" style="color: black;font-weight: bold;">Hãng sản xuất</a>
                <ul>
                   <li>
-                    <a href="">Apple</a>
+                    <a href="?c=all&m=index&table=laptop&hang_sx=Apple">Apple</a>
                   </li>
                </ul> 
                <ul>
                   <li>
-                    <a href="">Asus</a>
+                    <a href="?c=all&m=index&table=laptop&hang_sx=Asus">Asus</a>
                   </li>
                </ul>
                <ul>  
                   <li>
-                    <a href="">Dell</a>
+                    <a href="?c=all&m=index&table=laptop&hang_sx=Dell">Dell</a>
                   </li>
               </ul>
               <ul>  
                   <li>
-                    <a href="">Lenovo</a>
+                    <a href="?c=all&m=index&table=laptop&hang_sx=Lenovo">Lenovo</a>
                   </li>
               </ul>
               <ul>  
                   <li>
-                    <a href="">Acer</a>
+                    <a href="?c=all&m=index&table=laptop&hang_sx=Acer">Acer</a>
                   </li>
               </ul>
               <ul>  
                   <li>
-                    <a href="">HP</a>
+                    <a href="?c=all&m=index&table=laptop&hang_sx=HP">HP</a>
                   </li>
               </ul>
             </li>
@@ -272,32 +272,32 @@
              <a href="" style="color: black;font-weight: bold;">Mức giá</a>
                <ul>
                   <li>
-                    <a href="">1->5 triệu</a>
+                    <a href="?c=all&m=index&table=laptop&min=1000000&max=5000000">1->5 triệu</a>
                   </li>
                </ul> 
                <ul>
                   <li>
-                    <a href="">5->10 triệu</a>
+                    <a href="?c=all&m=index&table=laptop&min=5000000&max=10000000">5->10 triệu</a>
                   </li>
                </ul>
                <ul>  
                   <li>
-                    <a href="">10->15 triệu</a>
+                    <a href="?c=all&m=index&table=laptop&min=10000000&max=15000000">10->15 triệu</a>
                   </li>
               </ul>
               <ul>  
                   <li>
-                    <a href="">15->20 triệu</a>
+                    <a href="?c=all&m=index&table=laptop&min=15000000&max=20000000">15->20 triệu</a>
                   </li>
               </ul>
               <ul>  
                   <li>
-                    <a href="">20->25 triệu</a>
+                    <a href="?c=all&m=index&table=laptop&min=20000000&max=25000000">20->25 triệu</a>
                   </li>
               </ul>
               <ul>  
                   <li>
-                    <a href="">25->30 triệu</a>
+                    <a href="?c=all&m=index&table=laptop&min=25000000&max=30000000">25->30 triệu</a>
                   </li>
               </ul>
             </li>

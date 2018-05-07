@@ -1224,3 +1224,28 @@
   alert(currentLocation);
 </script>
 </html>  
+
+      <?php 
+      $start = strpos($currentLocation, '?') +1;
+
+      $currentLocation=substr($currentLocation,$start);
+
+      $pieces=explode("&", $currentLocation);
+
+      $currentLocation="";
+      foreach ($pieces as $key => $value) {
+        if(strrpos($value, 'min')!==false||strpos($value, 'max')!==false)
+        {
+            //echo $value;
+        }
+        else
+        {
+          if($key==0)
+          {
+            $currentLocation= $currentLocation."?".$value;
+          }
+          else
+            $currentLocation= $currentLocation."&".$value;
+        }
+      }
+      ?>
