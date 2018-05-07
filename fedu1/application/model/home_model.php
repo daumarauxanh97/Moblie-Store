@@ -251,7 +251,7 @@ class Home_model extends PDODriver
 	   for($i=1;$i<=$totalPage;$i++)
 	    {
 	        $html .= "<li style='list-style:none; display:inline-block; padding-left:25px;'><a href='".str_replace('{page}', $i, $linkCurrent)."'>".$i."</a></li>";
-	   }
+	    }
 	   if($currentPage < $totalPage && $currentPage >= 1)
 	     {
 	        $html .= "<li style='list-style:none; display:inline-block; padding-left:25px;'><a href='".str_replace('{page}', ($currentPage+1), $linkCurrent)."' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>";

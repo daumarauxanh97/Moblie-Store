@@ -50,7 +50,6 @@
       <p>Danh mục</p>
     </div>
 
-<<<<<<< HEAD
     <div class="hang_sx">
       <p>Hãng sản xuất</p>
       <ul>
@@ -70,34 +69,6 @@
        <?php endforeach;?>
      </ul>
    </div>
-=======
-  <!-- Left and right controls -->
-  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-    <span class="carousel-control-prev-icon" style="margin-left: -90px;"></span>
-  </a>
-  <a class="carousel-control-next" href="#demo" data-slide="next" style="margin-right: -40px;">
-    <span class="carousel-control-next-icon"></span>
-  </a>
-</div>
-<<<<<<< HEAD
-<!-- -->
-=======
-<?php $currentLocation=$_SERVER['REQUEST_URI'];?>
->>>>>>> 5e7eb76c66806b3265804c3cbbbfcee1943ce449
-<div class="side-bar ">
-	<div class="head-side-bar ">
-		<p>Danh mục</p>
-	</div>
-  <hr>
-	<div class="hang_sx">
-    <p>Hãng sản xuất</p>
-		<ul>
-		<?php foreach($data['allHangSX'] as $key => $hangSX):?>
-			<li><a href=<?php echo $currentLocation;?>"&hang_sx=<?php echo $hangSX['name']?>">&#187<?php echo $hangSX['name']?></a></li>
-		<?php endforeach;?>
-		</ul>
-	</div>
->>>>>>> 31240082a9e5e06304b696ab53c13ee44b839a88
    <hr style="font-size: 2px;">
    <div class="gia">
     <p>Gia thanh</p>
@@ -106,7 +77,7 @@
       $pieces=explode("&", $currentLocation);
       foreach ($pieces as $key => $value) 
       {
-        if(strstr($value, 'min')!==false||strstr($value, 'max')!==false)
+        if(strstr($value, 'min')!==false||strstr($value, 'max')!==false||strstr($value, 'page'))
         {
             unset($pieces[$key]);
         }
@@ -114,12 +85,12 @@
       $currentLocation=implode('&',$pieces);
       
       ?>
-      <li><a href="<?php echo $currentLocation;?>&min=1000000&max=5000000">&#187Từ 1 -> 5 triệu </a></li>
-      <li><a href="<?php echo $currentLocation;?>&min=5000000&max=10000000">&#187Từ 5 -> 10 triệu</a></li>
-      <li><a href="<?php echo $currentLocation;?>&min=10000000&max=15000000">&#187Từ 10 -> 15 triệu</a></li>
-      <li><a href="<?php echo $currentLocation;?>&min=15000000&max=20000000">&#187Từ 15 -> 20 triệu</a></li>
-      <li><a href="<?php echo $currentLocation;?>&min=20000000&max=25000000">&#187Từ 20 -> 25 triệu</a></li>
-      <li><a href="<?php echo $currentLocation;?>&min=25000000&max=30000000">&#187Từ 25 -> 30 triệu</a></li>
+      <li><a href="<?php echo $currentLocation;?>&min=1000000&max=5000000&page=1">&#187Từ 1 -> 5 triệu </a></li>
+      <li><a href="<?php echo $currentLocation;?>&min=5000000&max=10000000&page=1">&#187Từ 5 -> 10 triệu</a></li>
+      <li><a href="<?php echo $currentLocation;?>&min=10000000&max=15000000&page=1">&#187Từ 10 -> 15 triệu</a></li>
+      <li><a href="<?php echo $currentLocation;?>&min=15000000&max=20000000&page=1">&#187Từ 15 -> 20 triệu</a></li>
+      <li><a href="<?php echo $currentLocation;?>&min=20000000&max=25000000&page=1">&#187Từ 20 -> 25 triệu</a></li>
+      <li><a href="<?php echo $currentLocation;?>&min=25000000&max=30000000&page=1">&#187Từ 25 -> 30 triệu</a></li>
     </ul>
   </div>
   <hr style="font-size: 2px;">
