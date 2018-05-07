@@ -154,10 +154,6 @@ class Home_model extends PDODriver
 		$data=[];
 		$hang_sx="%".$hang_sx."%";
 
-<<<<<<< HEAD
-	public function getAllDataTable($table,$hang_sx="",$sap_xep="",$min="",$maxhuy="")
-	{
-=======
 		$sql="SELECT * FROM {$table} as a inner join hang_sx as b where a.id_sx=b.id and b.name like :hang_sx and gia>=:min and gia<=:max order by gia desc";
 		$stmt = $this->db->prepare($sql);
 			if ($stmt) {
@@ -181,7 +177,6 @@ class Home_model extends PDODriver
 	public function getAllDataTable($table,$hang_sx="",$sap_xep="",$min,$max)
 	{
         //die($sap_xep);
->>>>>>> 5e0ce9f75b2c21826ef87f536eaa3ca37d6df6a9
 		$data=[];
 		$hang_sx="%".$hang_sx."%";
 		$sql="SELECT * FROM {$table} as a inner join hang_sx as b where a.id_sx=b.id and b.name like :hang_sx and gia>=:min and gia<=:max order by gia :sap_xep";
@@ -200,11 +195,8 @@ class Home_model extends PDODriver
 				}
 				$stmt->closeCursor();
 			}
-<<<<<<< HEAD
-=======
         //print_r($data);
         //die($hang_sx.$max);
->>>>>>> 5e0ce9f75b2c21826ef87f536eaa3ca37d6df6a9
 		return $data;
 	}
 
@@ -228,6 +220,7 @@ class Home_model extends PDODriver
 		// die();
 		return $data;
 	}
+
 
 
 	public function getAllLimit($table,$start,$limit)
@@ -254,6 +247,8 @@ class Home_model extends PDODriver
 	}
 	public function Fullpanigate($currentPage=-1,$table="",$hang_sx="",$sap_xep="",$min="",$max="")
 	{
+		// echo "huydz".$hang_sx;die();
+
 	  $total = $this->getAllDataTable($table,$hang_sx,$sap_xep,$min,$max);
 	  $totalRecord = count($total);
 	  $totalPage = ceil($totalRecord/3);
