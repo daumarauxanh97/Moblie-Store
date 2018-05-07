@@ -58,14 +58,14 @@
       $pieces=explode("&", $currentLocation);
       foreach ($pieces as $key => $value) 
       {
-        if(strstr($value, 'hang_sx')!==false)
+        if(strstr($value, 'hang_sx')!==false ||strstr($value, 'page'))
         {
             unset($pieces[$key]);
         }
       }
       $currentLocation=implode('&',$pieces);
       ?>
-         <li><a href="<?php echo $currentLocation;?>&hang_sx=<?php echo $hangSX['name']?>">&#187<?php echo $hangSX['name']?></a></li>
+         <li><a href="<?php echo $currentLocation;?>&hang_sx=<?php echo $hangSX['name']?>&page=1">&#187<?php echo $hangSX['name']?></a></li>
        <?php endforeach;?>
      </ul>
    </div>
@@ -101,17 +101,17 @@
       $pieces=explode("&", $currentLocation);
       foreach ($pieces as $key => $value) 
       {
-        if(strstr($value, 'sap_xep')!==false)
+        if(strstr($value, 'sap_xep')!==false ||strstr($value, 'page'))
         {
             unset($pieces[$key]);
         }
       }
       $currentLocation=implode('&',$pieces);
       ?>
-      <li><a href="<?php echo $currentLocation;?>&sap_xep=new">&#187Mới nhất</a></li>
-      <li><a href="<?php echo $currentLocation;?>&sap_xep=view">&#187Xem nhiều</a></li>
-      <li><a href="<?php echo $currentLocation;?>&sap_xep=asc">&#187Giá từ thấp đến cao</a></li>
-      <li><a href="<?php echo $currentLocation;?>&sap_xep=desc">&#187Giá từ cao đến thấp</a></li>
+      <li><a href="<?php echo $currentLocation;?>&sap_xep=new&page=1">&#187Mới nhất</a></li>
+      <li><a href="<?php echo $currentLocation;?>&sap_xep=view&page=1">&#187Xem nhiều</a></li>
+      <li><a href="<?php echo $currentLocation;?>&sap_xep=asc&page=1">&#187Giá từ thấp đến cao</a></li>
+      <li><a href="<?php echo $currentLocation;?>&sap_xep=desc&page=1">&#187Giá từ cao đến thấp</a></li>
     </ul>
   </div>
 </div>

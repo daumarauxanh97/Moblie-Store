@@ -133,24 +133,30 @@ class Home_model extends PDODriver
         return $this->insert($table,$data);
 	}
 
-	public function getAllDataTable($table)
+	public function getAllDataTable($table,$hang_sx="",$sap_xep="",$min=0,$maxhuy=30000000)
 	{
-
+		$maxhuy=30000000;
+        die($maxhuy);
 		$data=[];
-		$sql ="SELECT * FROM {$table}";
+		$hang_sx="%".$hang_sx."%";
+		$sql="SELECT * FROM {$table} as a inner join hang_sx as b where a.id_sx=b.id and b.name like :hang_sx and gia>=0 and gia<=:max order by gia ";
 		$stmt = $this->db->prepare($sql);
-		if ($stmt) {
-			if ($stmt->execute()) 
-			{
-				if ($stmt->rowCount()>0) {
-					$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+			if ($stmt) {
+				$stmt->bindPaRam(':hang_sx',$hang_sx,PDO::PARAM_STR);
+				// $stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
+				// $stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
+				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
+				if ($stmt->execute()) 
+				{
+					if ($stmt->rowCount()>0) {
+                        
+						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+					}
 				}
+				$stmt->closeCursor();
 			}
-			$stmt->closeCursor();
-		}
-		// echo "<pre>";
-		// print_r($data);
-		// die();
+        print_r($data);
+        die($hang_sx.$max);
 		return $data;
 	}
 
@@ -203,7 +209,7 @@ class Home_model extends PDODriver
 	{
 		// echo "huydz".$hang_sx;die();
 
-	  $total = $this->getAllDataTable($table);
+	  $total = $this->getAllDataTable($table,$hang_sx,$sap_xep,$min,$max);
 	  $totalRecord = count($total);
 	  $totalPage = ceil($totalRecord/3);
 	  // $totalPage="300000";
