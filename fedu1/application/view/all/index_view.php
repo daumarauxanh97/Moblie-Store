@@ -43,7 +43,7 @@
     <span class="carousel-control-next-icon"></span>
   </a>
 </div>
-<?php $currentLocation=$_SERVER['REQUEST_URI'];echo $currentLocation; die("sada");?>
+<!-- -->
 <div class="side-bar ">
 	<div class="head-side-bar ">
 		<p>Danh mục</p>
