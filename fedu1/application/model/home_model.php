@@ -221,19 +221,19 @@ class Home_model extends PDODriver
 	  $html .= "";
       if($hang_sx=="" && $sap_xep !="" && $min!="" && $max!=""  )
       {
-        $linkCurrent="?c=all&m=index&table=".$table."$sap_xep=".$sap_xep."$min=".$min."$max=".$max."&page={page}";
+        $linkCurrent="?c=all&m=index&table=".$table."&sap_xep=".$sap_xep."&min=".$min."&max=".$max."&page={page}";
       }
 	  if ($sap_xep=="" && $hang_sx!="" && $min!="" && $max!="" ) {
-	  	$linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."$min=".$min."$max=".$max."&page={page}";
+	  	$linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."&min=".$min."&max=".$max."&page={page}";
 	  }
 	  if ($min=="" && $max=="" && $sap_xep!="" && $hang_sx!="" ) {
-	  	$linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."$sap_xep=".$sap_xep."&page={page}"; 
+	  	$linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."&sap_xep=".$sap_xep."&page={page}"; 
 	  }
 	  if ($hang_sx=="" && $sap_xep==""  && $min!="" && $max!="" ) {
-	  	$linkCurrent="?c=all&m=index&table=".$table."$min=".$min."$max=".$max."&page={page}";
+	  	$linkCurrent="?c=all&m=index&table=".$table."&min=".$min."&max=".$max."&page={page}";
 	  }
 	  if ($hang_sx=="" && $min=="" && $max==""  && $sap_xep!="" ) {
-	  	$linkCurrent="?c=all&m=index&table=".$table."$sap_xep=".$sap_xep."&page={page}";
+	  	$linkCurrent="?c=all&m=index&table=".$table."&sap_xep=".$sap_xep."&page={page}";
 	  }
 	  if ($sap_xep=="" && $min=="" && $max=="" && $hang_sx!="") {
 	  	$linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."&page={page}";
@@ -242,7 +242,7 @@ class Home_model extends PDODriver
 	  	$linkCurrent="?c=all&m=index&table=".$table."&page={page}"; 
 	  }
 	  if ($hang_sx!="" && $sap_xep !="" && $min!="" && $max!=""){
-	  	 $linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."$sap_xep=".$sap_xep."$min=".$min."$max=".$max."&page={page}";
+	  	 $linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."&sap_xep=".$sap_xep."&min=".$min."&max=".$max."&page={page}";
 	  }
 	  if($currentPage > 1 && $currentPage <= $totalPage)
 	     {
