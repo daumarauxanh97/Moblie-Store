@@ -206,13 +206,14 @@ class Home_model extends PDODriver
 	  $total = $this->getAllDataTable($table);
 	  $totalRecord = count($total);
 	  $totalPage = ceil($totalRecord/3);
-	  //die( $totalPage);
+	  // $totalPage="300000";
+	  // die($totalPage);
 	  if($currentPage <= 0) 
 	  {
-	   $currentPage =1;
+	   		$currentPage =1;
 	  }elseif($currentPage > $totalPage)
 	  {
-	   $currentPage = $totalPage;
+	   		$currentPage = $totalPage;
 	  }
 	  $start = ($currentPage -1) * 3;
 	  $html  = '';
