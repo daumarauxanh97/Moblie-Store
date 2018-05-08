@@ -132,81 +132,24 @@ class Home_model extends PDODriver
 	{
         return $this->insert($table,$data);
 	}
-	public function getMax($table){
-		$data=[];
-		$sql="SELECT max(gia) as gia FROM {$table} ";
-		$stmt = $this->db->prepare($sql);
-			if ($stmt) {
-				if ($stmt->execute()) 
-				{
-					if ($stmt->rowCount()>0) {
-						$data = $stmt ->fetch(PDO::FETCH_ASSOC);
-					}
-				}
-				$stmt->closeCursor();
-			}
-        return $data;
-	}/*
-	public function getAllDataTable($table,$hang_sx="",$sap_xep="",$min=0,$max=-1)
-	{
-		//$maxhuy="30000000";
-        //die("hello".$max);
-		$data=[];
-		$hang_sx="%".$hang_sx."%";
 
-<<<<<<< HEAD
-	public function getAllDataTable($table,$hang_sx="",$sap_xep="",$min="",$maxhuy="")
-	{
-=======
-		$sql="SELECT * FROM {$table} as a inner join hang_sx as b where a.id_sx=b.id and b.name like :hang_sx and gia>=:min and gia<=:max order by gia desc";
-		$stmt = $this->db->prepare($sql);
-			if ($stmt) {
-				$stmt->bindPaRam(':hang_sx',$hang_sx,PDO::PARAM_STR);
-				//$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
-				$stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
-				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
-				if ($stmt->execute()) 
-				{
-					if ($stmt->rowCount()>0) {
+ //    public function getAllDataTable($table)
+	// {
+	// 	$data=[];
+	// 	$sql="SELECT * FROM {$table} ";
+	// 	$stmt = $this->db->prepare($sql);
+	// 		if ($stmt) {
+	// 			if ($stmt->execute()) 
+	// 			{
+	// 				if ($stmt->rowCount()>0) {
                         
-						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
-					}
-				}
-				$stmt->closeCursor();
-			}
-       // print_r($data);
-        //die($sap_xep);
-		return $data;
-	}*/
-	public function getAllDataTable($table,$hang_sx="",$sap_xep="",$min,$max)
-	{
-        //die($sap_xep);
->>>>>>> 5e0ce9f75b2c21826ef87f536eaa3ca37d6df6a9
-		$data=[];
-		$hang_sx="%".$hang_sx."%";
-		$sql="SELECT * FROM {$table} as a inner join hang_sx as b where a.id_sx=b.id and b.name like :hang_sx and gia>=:min and gia<=:max order by gia :sap_xep";
-		$stmt = $this->db->prepare($sql);
-			if ($stmt) {
-				$stmt->bindPaRam(':hang_sx',$hang_sx,PDO::PARAM_STR);
-				$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
-				$stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
-				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
-				if ($stmt->execute()) 
-				{
-					if ($stmt->rowCount()>0) {
-                        
-						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
-					}
-				}
-				$stmt->closeCursor();
-			}
-<<<<<<< HEAD
-=======
-        //print_r($data);
-        //die($hang_sx.$max);
->>>>>>> 5e0ce9f75b2c21826ef87f536eaa3ca37d6df6a9
-		return $data;
-	}
+	// 					$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+	// 				}
+	// 			}
+	// 			$stmt->closeCursor();
+	// 		}
+	// 	return $data;
+	// }
 
 	public function getAllDataSXTable($table)
 	{
@@ -252,47 +195,145 @@ class Home_model extends PDODriver
 		// die();
 		return $data;
 	}
+	public function getAllDataTable($table,$hang_sx="",$sap_xep="",$min="",$max="")
+	{
+		$data=[];
+		if ($hang_sx!="" && $sap_xep=="" && $min=="" && $max=="" ){
+			echo "asdasd";
+			die();
+		$hang_sx="%".$hang_sx."%";
+		$sql="SELECT * FROM {$table} as a inner join hang_sx as b where a.id_sx=b.id and b.name like :hang_sx ";
+		$stmt = $this->db->prepare($sql);
+			if ($stmt) {
+				$stmt->bindPaRam(':hang_sx',$hang_sx,PDO::PARAM_STR);
+				if ($stmt->execute()) 
+				{
+					if ($stmt->rowCount()>0) {
+                        
+						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+				$stmt->closeCursor();
+			}
+		}
+		if ($hang_sx=="" && $sap_xep=="asc" && $min=="" && $max=="" ){
+		$hang_sx="%".$hang_sx."%";
+		$sql="SELECT * FROM {$table} order by gia asc  ";
+		$stmt = $this->db->prepare($sql);
+			if ($stmt) {
+				if ($stmt->execute()) 
+				{
+					if ($stmt->rowCount()>0) {
+                        
+						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+				$stmt->closeCursor();
+			}
+		}
+		if ($hang_sx=="" && $sap_xep=="desc" && $min=="" && $max=="" ){
+		$sql="SELECT * FROM {$table} order by gia desc ";
+		$stmt = $this->db->prepare($sql);
+			if ($stmt) {
+				$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
+				if ($stmt->execute()) 
+				{
+					if ($stmt->rowCount()>0) {
+                        
+						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+				$stmt->closeCursor();
+			}
+		}
+		if ($hang_sx=="" && $sap_xep=="new" && $min=="" && $max=="" ){
+		$sql="SELECT * FROM {$table} order by create_time";
+		$stmt = $this->db->prepare($sql);
+			if ($stmt) {
+				$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
+				if ($stmt->execute()) 
+				{
+					if ($stmt->rowCount()>0) {
+                        
+						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+				$stmt->closeCursor();
+			}
+		}
+		if ($hang_sx=="" && $sap_xep=="view" && $min=="" && $max=="" ){
+		$sql="SELECT * FROM {$table} order by view";
+		$stmt = $this->db->prepare($sql);
+			if ($stmt) {
+				$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
+				if ($stmt->execute()) 
+				{
+					if ($stmt->rowCount()>0) {
+                        
+						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+				$stmt->closeCursor();
+			}
+		}
+		if ($hang_sx=="" && $sap_xep==""  && $min!="" && $max!="" ) {
+        	$sql ="SELECT *  FROM  {$table} where gia>=:min and gia<=:max order by gia  limit :start,:limmit";
+        	$stmt = $this->db->prepare($sql);
+			if ($stmt) {
+				$stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
+				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
+				if ($stmt->execute()) 
+				{
+					if($stmt->rowCount()>0) {
+						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+				$stmt->closeCursor();
+			}
+        }
+
+		return $data;
+	}
 	public function Fullpanigate($currentPage=-1,$table="",$hang_sx="",$sap_xep="",$min="",$max="")
 	{
-	  $total = $this->getAllDataTable($table,$hang_sx,$sap_xep,$min,$max);
+	  $total = $this->getAllDataTable($table);
 	  $totalRecord = count($total);
 	  $totalPage = ceil($totalRecord/3);
-	  // $totalPage="300000";
-	  // die($totalPage);
+	  //die( $totalPage);
 	  if($currentPage <= 0) 
 	  {
-	   		$currentPage =1;
+	   $currentPage =1;
 	  }elseif($currentPage > $totalPage)
 	  {
-	   		$currentPage = $totalPage;
+	   $currentPage = $totalPage;
 	  }
 	  $start = ($currentPage -1) * 3;
 	  $html  = '';
 	  $html .= "<nav aria-label='Page navigation'>";
 	  $html .= "<ul class='pagination phantrang' >";
 	  $html .= "";
-      if($hang_sx=="" && $sap_xep !="")
+      if($hang_sx=="" && $sap_xep !="" && $min!="" && $max!=""  )
       {
         $linkCurrent="?c=all&m=index&table=".$table."&sap_xep=".$sap_xep."&min=".$min."&max=".$max."&page={page}";
       }
-	  if ($sap_xep=="" && $hang_sx!="") {
+	  if ($sap_xep=="" && $hang_sx!="" && $min!="" && $max!="" ) {
 	  	$linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."&min=".$min."&max=".$max."&page={page}";
 	  }
-	  if ($sap_xep!="" && $hang_sx!="" ) {
+	  if ($min=="" && $max=="" && $sap_xep!="" && $hang_sx!="" ) {
 	  	$linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."&sap_xep=".$sap_xep."&page={page}"; 
 	  }
 	  if ($hang_sx=="" && $sap_xep==""  && $min!="" && $max!="" ) {
 	  	$linkCurrent="?c=all&m=index&table=".$table."&min=".$min."&max=".$max."&page={page}";
 	  }
-	  // if ($hang_sx=="" && $min=="" && $max==""  && $sap_xep!="" ) {
-	  // 	$linkCurrent="?c=all&m=index&table=".$table."&sap_xep=".$sap_xep."&page={page}";
-	  // }
-	  // if ($sap_xep=="" && $min=="" && $max=="" && $hang_sx!="") {
-	  // 	$linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."&page={page}";
-	  // }
-	  // if ($hang_sx=="" && $sap_xep=="" && $min=="" && $max=="" ) {
-	  // 	$linkCurrent="?c=all&m=index&table=".$table."&page={page}"; 
-	  // }
+	  if ($hang_sx=="" && $min=="" && $max==""  && $sap_xep!="" ) {
+	  	$linkCurrent="?c=all&m=index&table=".$table."&sap_xep=".$sap_xep."&page={page}";
+	  }
+	  if ($sap_xep=="" && $min=="" && $max=="" && $hang_sx!="") {
+	  	$linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."&page={page}";
+	  }
+	  if ($hang_sx=="" && $sap_xep=="" && $min=="" && $max=="" ) {
+	  	$linkCurrent="?c=all&m=index&table=".$table."&page={page}"; 
+	  }
 	  if ($hang_sx!="" && $sap_xep !="" && $min!="" && $max!=""){
 	  	 $linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."&sap_xep=".$sap_xep."&min=".$min."&max=".$max."&page={page}";
 	  }
@@ -312,10 +353,6 @@ class Home_model extends PDODriver
 	     $html .= "</nav>";
  
 	     $phone= $this->allProduct($table,$hang_sx,$sap_xep,$min,$max,$start,3);
-	     //echo "<pre>";
-	     //print_r($phone);die();
-	     //$phone4= count($phone);
-	  	 //die();
 	     return array('pageHTML' => $html,
 	        'dataphone'=>$phone
 	      );
