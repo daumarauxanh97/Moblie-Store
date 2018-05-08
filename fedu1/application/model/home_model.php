@@ -133,6 +133,7 @@ class Home_model extends PDODriver
         return $this->insert($table,$data);
 	}
 
+<<<<<<< HEAD
  //    public function getAllDataTable($table)
 	// {
 	// 	$data=[];
@@ -150,6 +151,53 @@ class Home_model extends PDODriver
 	// 		}
 	// 	return $data;
 	// }
+=======
+		$sql="SELECT * FROM {$table} as a inner join hang_sx as b where a.id_sx=b.id and b.name like :hang_sx and gia>=:min and gia<=:max order by gia desc";
+		$stmt = $this->db->prepare($sql);
+			if ($stmt) {
+				$stmt->bindPaRam(':hang_sx',$hang_sx,PDO::PARAM_STR);
+				//$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
+				$stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
+				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
+				if ($stmt->execute()) 
+				{
+					if ($stmt->rowCount()>0) {
+                        
+						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+				$stmt->closeCursor();
+			}
+       // print_r($data);
+        //die($sap_xep);a
+		return $data;
+	}*/
+	public function getAllDataTable($table,$hang_sx="",$sap_xep="",$min,$max)
+	{
+        //die($sap_xep);
+		$data=[];
+		$hang_sx="%".$hang_sx."%";
+		$sql="SELECT * FROM {$table} as a inner join hang_sx as b where a.id_sx=b.id and b.name like :hang_sx and gia>=:min and gia<=:max order by gia :sap_xep";
+		$stmt = $this->db->prepare($sql);
+			if ($stmt) {
+				$stmt->bindPaRam(':hang_sx',$hang_sx,PDO::PARAM_STR);
+				$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
+				$stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
+				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
+				if ($stmt->execute()) 
+				{
+					if ($stmt->rowCount()>0) {
+                        
+						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+				$stmt->closeCursor();
+			}
+        //print_r($data);
+        //die($hang_sx.$max);
+		return $data;
+	}
+>>>>>>> 566bac29240b4d55493999cc0316eb3573f250e1
 
 	public function getAllDataSXTable($table)
 	{
@@ -171,6 +219,7 @@ class Home_model extends PDODriver
 		// die();
 		return $data;
 	}
+
 
 
 	public function getAllLimit($table,$start,$limit)
@@ -296,7 +345,13 @@ class Home_model extends PDODriver
 	}
 	public function Fullpanigate($currentPage=-1,$table="",$hang_sx="",$sap_xep="",$min="",$max="")
 	{
+<<<<<<< HEAD
 	  $total = $this->getAllDataTable($table);
+=======
+		// echo "huydz".$hang_sx;die();
+
+	  $total = $this->getAllDataTable($table,$hang_sx,$sap_xep,$min,$max);
+>>>>>>> 566bac29240b4d55493999cc0316eb3573f250e1
 	  $totalRecord = count($total);
 	  $totalPage = ceil($totalRecord/3);
 	  //die( $totalPage);
