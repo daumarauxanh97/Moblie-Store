@@ -78,9 +78,6 @@ class Home_model extends PDODriver
 			}
 			$stmt->closeCursor();
 		}
-		// echo "<pre>";
-		// print_r($data);
-		// die();
 		return $data;
 
 	}
@@ -121,9 +118,6 @@ class Home_model extends PDODriver
 			}
 			$stmt->closeCursor();
 		}
-		// echo "<pre>";
-		// print_r($data);
-		// die();
 		return $data;
 
 	}
@@ -133,57 +127,12 @@ class Home_model extends PDODriver
         return $this->insert($table,$data);
 	}
 
-<<<<<<< HEAD
- //    public function getAllDataTable($table)
-	// {
-	// 	$data=[];
-	// 	$sql="SELECT * FROM {$table} ";
-	// 	$stmt = $this->db->prepare($sql);
-	// 		if ($stmt) {
-	// 			if ($stmt->execute()) 
-	// 			{
-	// 				if ($stmt->rowCount()>0) {
-                        
-	// 					$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
-	// 				}
-	// 			}
-	// 			$stmt->closeCursor();
-	// 		}
-	// 	return $data;
-	// }
-=======
-		$sql="SELECT * FROM {$table} as a inner join hang_sx as b where a.id_sx=b.id and b.name like :hang_sx and gia>=:min and gia<=:max order by gia desc";
-		$stmt = $this->db->prepare($sql);
-			if ($stmt) {
-				$stmt->bindPaRam(':hang_sx',$hang_sx,PDO::PARAM_STR);
-				//$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
-				$stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
-				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
-				if ($stmt->execute()) 
-				{
-					if ($stmt->rowCount()>0) {
-                        
-						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
-					}
-				}
-				$stmt->closeCursor();
-			}
-       // print_r($data);
-        //die($sap_xep);a
-		return $data;
-	}*/
-	public function getAllDataTable($table,$hang_sx="",$sap_xep="",$min,$max)
+	public function getMax($table)
 	{
-        //die($sap_xep);
 		$data=[];
-		$hang_sx="%".$hang_sx."%";
-		$sql="SELECT * FROM {$table} as a inner join hang_sx as b where a.id_sx=b.id and b.name like :hang_sx and gia>=:min and gia<=:max order by gia :sap_xep";
+		$sql="SELECT max(gia) FROM {$table}  ";
 		$stmt = $this->db->prepare($sql);
 			if ($stmt) {
-				$stmt->bindPaRam(':hang_sx',$hang_sx,PDO::PARAM_STR);
-				$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
-				$stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
-				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
 				if ($stmt->execute()) 
 				{
 					if ($stmt->rowCount()>0) {
@@ -193,11 +142,41 @@ class Home_model extends PDODriver
 				}
 				$stmt->closeCursor();
 			}
-        //print_r($data);
-        //die($hang_sx.$max);
 		return $data;
 	}
->>>>>>> 566bac29240b4d55493999cc0316eb3573f250e1
+	public function getAllDataTable($table,$hang_sx="",$sap_xep="",$min,$max)
+	{
+		$data=[];
+		$hang_sx="%".$hang_sx."%";
+		if ($sap_xep='asc') {
+
+			$sql="SELECT * FROM {$table} as a inner join hang_sx as b where a.id_sx=b.id and b.name like :hang_sx and gia>=:min and gia<=:max order by gia asc";
+		}
+		if ($sap_xep='desc') {
+			$sql="SELECT * FROM {$table} as a inner join hang_sx as b where a.id_sx=b.id and b.name like :hang_sx and gia>=:min and gia<=:max order by gia desc";
+		}
+		if ($sap_xep='new') {
+			$sql="SELECT * FROM {$table} as a inner join hang_sx as b where a.id_sx=b.id and b.name like :hang_sx and gia>=:min and gia<=:max order by create_time";
+		}
+		if ($sap_xep='view') {
+			$sql="SELECT * FROM {$table} as a inner join hang_sx as b where a.id_sx=b.id and b.name like :hang_sx and gia>=:min and gia<=:max order by view";
+		}
+		$stmt = $this->db->prepare($sql);
+			if ($stmt) {
+
+				$stmt->bindPaRam(':hang_sx',$hang_sx,PDO::PARAM_STR);
+				$stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
+				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
+				if ($stmt->execute()) 
+				{
+					if ($stmt->rowCount()>0) {                      
+				    	$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+				$stmt->closeCursor();
+			}
+		return $data;
+	}
 
 	public function getAllDataSXTable($table)
 	{
@@ -214,13 +193,8 @@ class Home_model extends PDODriver
 			}
 			$stmt->closeCursor();
 		}
-		// echo "<pre>";
-		// print_r($data);
-		// die();
 		return $data;
 	}
-
-
 
 	public function getAllLimit($table,$start,$limit)
 	{
@@ -239,122 +213,14 @@ class Home_model extends PDODriver
 			}
 			$stmt->closeCursor();
 		}
-		// echo "<pre>";
-		// print_r($data);
-		// die();
-		return $data;
-	}
-	public function getAllDataTable($table,$hang_sx="",$sap_xep="",$min="",$max="")
-	{
-		$data=[];
-		if ($hang_sx!="" && $sap_xep=="" && $min=="" && $max=="" ){
-			echo "asdasd";
-			die();
-		$hang_sx="%".$hang_sx."%";
-		$sql="SELECT * FROM {$table} as a inner join hang_sx as b where a.id_sx=b.id and b.name like :hang_sx ";
-		$stmt = $this->db->prepare($sql);
-			if ($stmt) {
-				$stmt->bindPaRam(':hang_sx',$hang_sx,PDO::PARAM_STR);
-				if ($stmt->execute()) 
-				{
-					if ($stmt->rowCount()>0) {
-                        
-						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
-					}
-				}
-				$stmt->closeCursor();
-			}
-		}
-		if ($hang_sx=="" && $sap_xep=="asc" && $min=="" && $max=="" ){
-		$hang_sx="%".$hang_sx."%";
-		$sql="SELECT * FROM {$table} order by gia asc  ";
-		$stmt = $this->db->prepare($sql);
-			if ($stmt) {
-				if ($stmt->execute()) 
-				{
-					if ($stmt->rowCount()>0) {
-                        
-						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
-					}
-				}
-				$stmt->closeCursor();
-			}
-		}
-		if ($hang_sx=="" && $sap_xep=="desc" && $min=="" && $max=="" ){
-		$sql="SELECT * FROM {$table} order by gia desc ";
-		$stmt = $this->db->prepare($sql);
-			if ($stmt) {
-				$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
-				if ($stmt->execute()) 
-				{
-					if ($stmt->rowCount()>0) {
-                        
-						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
-					}
-				}
-				$stmt->closeCursor();
-			}
-		}
-		if ($hang_sx=="" && $sap_xep=="new" && $min=="" && $max=="" ){
-		$sql="SELECT * FROM {$table} order by create_time";
-		$stmt = $this->db->prepare($sql);
-			if ($stmt) {
-				$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
-				if ($stmt->execute()) 
-				{
-					if ($stmt->rowCount()>0) {
-                        
-						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
-					}
-				}
-				$stmt->closeCursor();
-			}
-		}
-		if ($hang_sx=="" && $sap_xep=="view" && $min=="" && $max=="" ){
-		$sql="SELECT * FROM {$table} order by view";
-		$stmt = $this->db->prepare($sql);
-			if ($stmt) {
-				$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
-				if ($stmt->execute()) 
-				{
-					if ($stmt->rowCount()>0) {
-                        
-						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
-					}
-				}
-				$stmt->closeCursor();
-			}
-		}
-		if ($hang_sx=="" && $sap_xep==""  && $min!="" && $max!="" ) {
-        	$sql ="SELECT *  FROM  {$table} where gia>=:min and gia<=:max order by gia  limit :start,:limmit";
-        	$stmt = $this->db->prepare($sql);
-			if ($stmt) {
-				$stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
-				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
-				if ($stmt->execute()) 
-				{
-					if($stmt->rowCount()>0) {
-						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
-					}
-				}
-				$stmt->closeCursor();
-			}
-        }
-
 		return $data;
 	}
 	public function Fullpanigate($currentPage=-1,$table="",$hang_sx="",$sap_xep="",$min="",$max="")
 	{
-<<<<<<< HEAD
-	  $total = $this->getAllDataTable($table);
-=======
-		// echo "huydz".$hang_sx;die();
-
 	  $total = $this->getAllDataTable($table,$hang_sx,$sap_xep,$min,$max);
->>>>>>> 566bac29240b4d55493999cc0316eb3573f250e1
+	  $total = $this->getAllDataTable($table,$hang_sx,$sap_xep,$min,$max);
 	  $totalRecord = count($total);
 	  $totalPage = ceil($totalRecord/3);
-	  //die( $totalPage);
 	  if($currentPage <= 0) 
 	  {
 	   $currentPage =1;
@@ -367,29 +233,17 @@ class Home_model extends PDODriver
 	  $html .= "<nav aria-label='Page navigation'>";
 	  $html .= "<ul class='pagination phantrang' >";
 	  $html .= "";
-      if($hang_sx=="" && $sap_xep !="" && $min!="" && $max!=""  )
+      if($hang_sx=="" && $sap_xep !=""   )
       {
         $linkCurrent="?c=all&m=index&table=".$table."&sap_xep=".$sap_xep."&min=".$min."&max=".$max."&page={page}";
       }
-	  if ($sap_xep=="" && $hang_sx!="" && $min!="" && $max!="" ) {
+	  if ($sap_xep=="" && $hang_sx!=""  ) {
 	  	$linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."&min=".$min."&max=".$max."&page={page}";
 	  }
-	  if ($min=="" && $max=="" && $sap_xep!="" && $hang_sx!="" ) {
-	  	$linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."&sap_xep=".$sap_xep."&page={page}"; 
-	  }
-	  if ($hang_sx=="" && $sap_xep==""  && $min!="" && $max!="" ) {
+	  if ($hang_sx=="" && $sap_xep==""   ) {
 	  	$linkCurrent="?c=all&m=index&table=".$table."&min=".$min."&max=".$max."&page={page}";
 	  }
-	  if ($hang_sx=="" && $min=="" && $max==""  && $sap_xep!="" ) {
-	  	$linkCurrent="?c=all&m=index&table=".$table."&sap_xep=".$sap_xep."&page={page}";
-	  }
-	  if ($sap_xep=="" && $min=="" && $max=="" && $hang_sx!="") {
-	  	$linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."&page={page}";
-	  }
-	  if ($hang_sx=="" && $sap_xep=="" && $min=="" && $max=="" ) {
-	  	$linkCurrent="?c=all&m=index&table=".$table."&page={page}"; 
-	  }
-	  if ($hang_sx!="" && $sap_xep !="" && $min!="" && $max!=""){
+	  if ($hang_sx!="" && $sap_xep !="" ){
 	  	 $linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."&sap_xep=".$sap_xep."&min=".$min."&max=".$max."&page={page}";
 	  }
 	  if($currentPage > 1 && $currentPage <= $totalPage)
@@ -406,7 +260,6 @@ class Home_model extends PDODriver
 	      }
 	     $html .= "</ul>";
 	     $html .= "</nav>";
- 
 	     $phone= $this->allProduct($table,$hang_sx,$sap_xep,$min,$max,$start,3);
 	     return array('pageHTML' => $html,
 	        'dataphone'=>$phone
@@ -415,15 +268,70 @@ class Home_model extends PDODriver
 
 	public function allProduct($table,$hang_sx="",$sap_xep="",$min="",$max="",$start,$limit)
 	{
-		//die($table.$hang_sx.$sap_xep.$min.$max.$start.$limit);
         $data=[];
-        if($hang_sx=="" && $sap_xep !="" && $min!="" && $max!=""  )
+        if($hang_sx=="" && $sap_xep =="asc"   )
         {
 
-	        	$sql ="SELECT *  FROM  {$table} where gia>=:min and gia<=:max order by gia :sap_xep limit :start,:limmit";
+	        	$sql ="SELECT *  FROM  {$table} where gia>=:min and gia<=:max order by gia asc limit :start,:limmit";
 	        	$stmt = $this->db->prepare($sql);
 			if ($stmt) {
-				$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
+				$stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
+				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
+				$stmt->bindPaRam(':start',$start,PDO::PARAM_INT);
+				$stmt->bindPaRam(':limmit',$limit,PDO::PARAM_INT);
+				if ($stmt->execute()) 
+				{
+					if ($stmt->rowCount()>0) {
+						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+				$stmt->closeCursor();
+			}
+        }
+         if($hang_sx=="" && $sap_xep =="desc"   )
+        {
+
+	        	$sql ="SELECT *  FROM  {$table} where gia>=:min and gia<=:max order by gia desc limit :start,:limmit";
+	        	$stmt = $this->db->prepare($sql);
+			if ($stmt) {
+				$stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
+				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
+				$stmt->bindPaRam(':start',$start,PDO::PARAM_INT);
+				$stmt->bindPaRam(':limmit',$limit,PDO::PARAM_INT);
+				if ($stmt->execute()) 
+				{
+					if ($stmt->rowCount()>0) {
+						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+				$stmt->closeCursor();
+			}
+        }
+         if($hang_sx=="" && $sap_xep =="new"   )
+        {
+
+	        	$sql ="SELECT *  FROM  {$table} where gia>=:min and gia<=:max order by create_time desc limit :start,:limmit";
+	        	$stmt = $this->db->prepare($sql);
+			if ($stmt) {
+				$stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
+				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
+				$stmt->bindPaRam(':start',$start,PDO::PARAM_INT);
+				$stmt->bindPaRam(':limmit',$limit,PDO::PARAM_INT);
+				if ($stmt->execute()) 
+				{
+					if ($stmt->rowCount()>0) {
+						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+					}
+				}
+				$stmt->closeCursor();
+			}
+        }
+         if($hang_sx=="" && $sap_xep =="view"   )
+        {
+
+	        	$sql ="SELECT *  FROM  {$table} where gia>=:min and gia<=:max order by view desc limit :start,:limmit";
+	        	$stmt = $this->db->prepare($sql);
+			if ($stmt) {
 				$stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
 				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
 				$stmt->bindPaRam(':start',$start,PDO::PARAM_INT);
@@ -437,8 +345,7 @@ class Home_model extends PDODriver
 				$stmt->closeCursor();
 			}
         } 
-        if ($sap_xep=="" && $hang_sx!="" && $min!="" && $max!="" ) {
-        	//die("Hello World");
+        if ($sap_xep=="" && $hang_sx!="") {
 	        	$sql ="SELECT *  FROM  {$table}  as a inner join hang_sx as b where a.id_sx=b.id and b.name =:hang_sx and gia>=:min and gia<=:max order by gia limit :start,:limmit";
 	        	$stmt = $this->db->prepare($sql);
 			if ($stmt) {
@@ -449,7 +356,6 @@ class Home_model extends PDODriver
 				$stmt->bindPaRam(':limmit',$limit,PDO::PARAM_INT);
 				if ($stmt->execute()) 
 				{
-					// die($sql);
 					if ($stmt->rowCount()>0) {
 						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
 					}
@@ -457,25 +363,7 @@ class Home_model extends PDODriver
 				$stmt->closeCursor();
 			}
         }
-        if ($min=="" && $max=="" && $sap_xep!="" && $hang_sx!="" ) {
-
-        	$sql ="SELECT *  FROM  {$table}  as a inner join hang_sx as b where a.id_sx=b.id and b.name =:hang_sx order by gia :sap_xep limit :start,:limmit";
-        	$stmt = $this->db->prepare($sql);
-			if ($stmt) {
-				$stmt->bindPaRam(':hang_sx',$hang_sx,PDO::PARAM_STR);
-				$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
-				$stmt->bindPaRam(':start',$start,PDO::PARAM_INT);
-				$stmt->bindPaRam(':limmit',$limit,PDO::PARAM_INT);
-				if ($stmt->execute()) 
-				{
-					if ($stmt->rowCount()>0) {
-						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
-					}
-				}
-				$stmt->closeCursor();
-			}
-        }
-        if ($hang_sx=="" && $sap_xep==""  && $min!="" && $max!="" ) {
+        if ($hang_sx=="" && $sap_xep==""  ) {
         	$sql ="SELECT *  FROM  {$table} where gia>=:min and gia<=:max order by gia  limit :start,:limmit";
         	$stmt = $this->db->prepare($sql);
 			if ($stmt) {
@@ -485,7 +373,6 @@ class Home_model extends PDODriver
 				$stmt->bindPaRam(':limmit',$limit,PDO::PARAM_INT);
 				if ($stmt->execute()) 
 				{
-					//die($sql);
 					if($stmt->rowCount()>0) {
 						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
 					}
@@ -493,54 +380,7 @@ class Home_model extends PDODriver
 				$stmt->closeCursor();
 			}
         }
-        if ($hang_sx=="" && $min=="" && $max==""  && $sap_xep!="" ) {
-        	$sql ="SELECT *  FROM  {$table} order by gia :sap_xep limit :start,:limmit";
-        	$stmt = $this->db->prepare($sql);
-			if ($stmt) {
-				$stmt->bindPaRam(':sap_xep',$sap_xep,PDO::PARAM_STR);
-				$stmt->bindPaRam(':start',$start,PDO::PARAM_INT);
-				$stmt->bindPaRam(':limmit',$limit,PDO::PARAM_INT);
-				if ($stmt->execute()) 
-				{
-					if ($stmt->rowCount()>0) {
-						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
-					}
-				}
-				$stmt->closeCursor();
-			}
-        }
-        if ($sap_xep=="" && $min=="" && $max=="" && $hang_sx!="") {
-        	$sql ="SELECT *  FROM  {$table}  as a inner join hang_sx as b where a.id_sx=b.id and b.name =:hang_sx  order by gia limit :start,:limmit";
-        	$stmt = $this->db->prepare($sql);
-			if ($stmt) {
-				$stmt->bindPaRam(':hang_sx',$hang_sx,PDO::PARAM_STR);
-				$stmt->bindPaRam(':start',$start,PDO::PARAM_INT);
-				$stmt->bindPaRam(':limmit',$limit,PDO::PARAM_INT);
-				if ($stmt->execute()) 
-				{
-					if ($stmt->rowCount()>0) {
-						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
-					}
-				}
-				$stmt->closeCursor();
-			}
-        }
-        if ($hang_sx=="" && $sap_xep=="" && $min=="" && $max=="" ) {
-        	$sql ="SELECT *  FROM  {$table}  limit :start,:limmit";
-	        $stmt = $this->db->prepare($sql);
-			if ($stmt) {
-				$stmt->bindPaRam(':start',$start,PDO::PARAM_INT);
-				$stmt->bindPaRam(':limmit',$limit,PDO::PARAM_INT);
-				if ($stmt->execute()) 
-				{
-					if ($stmt->rowCount()>0) {
-						$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
-					}
-				}
-				$stmt->closeCursor();
-			}
-        }
-        else {
+        if ($hang_sx!="" && $sap_xep!=""  ) {
         	$sql ="SELECT *  FROM  {$table}  as a inner join hang_sx as b where a.id_sx=b.id and b.name =:hang_sx and gia>=:min and gia<=:max order by gia :sap_xep limit :start,:limmit";
         	$stmt = $this->db->prepare($sql);
 			if ($stmt) {
@@ -559,9 +399,6 @@ class Home_model extends PDODriver
 				$stmt->closeCursor();
 			}
         }		
-		// echo "<pre>";
-		// print_r($data);
-		// die();
 		return $data;
 	}
 
