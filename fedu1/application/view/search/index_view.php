@@ -16,7 +16,7 @@
   <script src="public/js/index.js"></script>
 </head>
 <body>
-<div class="wrapper" style="width: 1200px;margin: auto;">
+<div class="wrapper" style="width: 1200px;margin: auto; ">
 <div style="margin-bottom: 10px;">
 <p style="display: inline;font-size: 20px;">Trang chủ </p></a><i  style="display: inline;font-size: 20px;font-size: 20px;" class="fa fa-angle-right"></i>
  <p style="display: inline;font-size: 20px;">Tìm kiếm</p><i  style="display: inline;font-size: 20px;font-size: 20px;" class="fa fa-angle-right"></i>  
@@ -24,7 +24,7 @@
  </div>
  <div style="min-height: 1200px;">
 <?php foreach($data['phone'] as $key => $phone): ?>
-      <div class="col-md-4 " style="display: inline-block;min-height:380px;">
+      <div class="col-md-3 " style="display: inline-block;min-height:380px;">
       <div class="pd1 " style="height:214px;width:100%;">
        <a href="?c=product&m=detail&id_phone=<?php echo $phone['id'];?>"><img src="uploads/images/<?php echo $phone['images'];?>" style="width: 200px;height: auto;margin-top: 5px;"></a>
       </div>
