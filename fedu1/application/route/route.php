@@ -27,7 +27,10 @@ class Route
 	{
 		require 'application/controller/order.php';
 	}
-	
+	public function search()
+	{
+		require 'application/controller/search.php';
+	}
 }
 $c =isset($_GET['c'])?trim($_GET['c']):'home';
 $controller = new Route();

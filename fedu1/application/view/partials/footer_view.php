@@ -12,31 +12,31 @@
 	<div style="width: 1200px;margin: auto;padding-top: 30px;" class="row">
 		<div class="col-md-4">
 			<ul>
-				<li><a href="">Người thực hiên: Vũ Quốc Huy</a></li>
-				<li><a href="">MSV:1551060725</a></li>
-				<li><a href="">Email:thangld52@wru.vn</a></li>
-				<li><a href="">SDT:xxxxxxxxx</a></li>
+				<li><a href="">Hỏi đáp</a></li>
+				<li><a href="">Đật hàng</a></li>
+				<li><a href="">Thanh toán</a></li>
+				<li><a href="">Bảo hành</a></li>
 			</ul>
 		</div>
 		<div class="col-md-4">
 			<ul>
 				<li><a href="">Người thực hiên: Lê Đức Thắng</a></li>
-				<li><a href="">MSV:1551060725</a></li>
+				<li><a href="">Sdt:0976734190</a></li>
 				<li><a href="">Email:thangld52@wru.vn</a></li>
-				<li><a href="">SDT:xxxxxxxxx</a></li>
+				<li><a href="">Địa chỉ:Phường Mai Động,Quận Hoàng Mai,HN</a></li>
 			</ul>
 		</div>
 		<div class="col-md-4" >
 			<ul>
-				<li><a href="">Người thực hiên: Lê Đức Thắng</a></li>
-				<li><a href="">MSV:1551060725</a></li>
-				<li><a href="">Email:thangld52@wru.vn</a></li>
-				<li><a href="">SDT:xxxxxxxxx</a></li>
+				<li><a href="">Tư vấn khách hàng</a></li>
+				<li><a href="">Điều khoản</a></li>
+				<li><a href="">Liên hệ</a></li>
+				<li><a href="">Các thông tin khác</a></li>
 			</ul>
 		</div>
 	</div>	
 </div>
-<div class=" " style="width: 100%;height: 120px;background-color: #222222;">
+<div class=" " style="width: 100%;height: 120px;background-color: #222222;margin-bottom: 0px;">
   	<div class="row">
 		<div class="col-md-12" style="width: 1200px;margin: auto;text-align: center;padding-top: 20px;">
 	       <a href=".">Home | </a>  <a href="#">Search | </a>  <a href="#">New Releases  |  </a><a href="#">FAQs  |  </a><a href="#">Contact Us</a>       

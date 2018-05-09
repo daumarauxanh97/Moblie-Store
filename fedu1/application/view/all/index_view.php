@@ -118,26 +118,44 @@
 <div class="content">
 <?php $id_table=$_GET['table']?? '';?>
 <?php if ($id_table=="phone"):?>
-<?php foreach($data['product'] as $key => $product): ?>
-      <div class="col-md-4 " style="">
-      <a href="?c=product&m=detail&id_phone=<?php echo $product['id'];?>"><img src="public/images/<?php echo $product['images'];?>" style="width: 180px;height: 220px;"></a>
-      <a href="?c=product&m=detail&id_phone=<?php echo $product['id'];?>"><p><?php echo $product['phone_name'];?></p>
-      <h4><?php echo $product['gia'];?></h4>  </a>
-    </div>
+<?php foreach($data['product'] as $key => $phone): ?>
+      <div class="col-md-4 " style="display: inline-block;min-height:380px;">
+      <div class="pd1 " style="height:214px;width:100%;">
+       <a href="?c=product&m=detail&id_phone=<?php echo $phone['id'];?>"><img src="uploads/images/<?php echo $phone['images'];?>" style="width: 200px;height: auto;margin-top: 5px;"></a>
+      </div>
+      <hr style="color: #ddd;height: 2px;">
+      <div class="PD2" ">
+       <h2><a href="?c=product&m=detail&id_phone=<?php echo $phone['id'];?>"><p style="color: "><?php echo $phone['phone_name'];?></p></h2>
+      <h4><?php echo $phone['gia'];?></h4></a>
+    <form style="display: inline-block;" method="POST" action="?c=cart&m=add&id_phone=<?php echo $phone['id'];?>">
+    <button type="submit" class="btn btn-danger" >Mua ngay</button>
+    </form>
+       <button class="btn btn-primary">Xem chi tiết</button>
+      </div>
+      </div>
   <?php endforeach; ?>
   <?php echo $data['page'];?>
 <?php endif;?>
 <?php if ($id_table=="laptop"):?>
-<?php foreach($data['product'] as $key => $product): ?>
-
-      <div class="col-md-4 " style="">
-      <a href="?c=product&m=detail&id_laptop=<?php echo $product['id'];?>"><img src="public/images/<?php echo $product['images'];?>" style="width: 180px;height: 220px;"></a>
-      <a href="?c=product&m=detail&id_laptop=<?php echo $product['id'];?>"><p><?php echo $product['laptop_name'];?></p>
-      <h4><?php echo $product['gia'];?></h4>  </a>
-    </div>
+    <?php foreach($data['product'] as $key => $laptop): ?>
+      <div class="col-md-4 " style="display: inline-block;min-height:380px;">
+      <div class="pd1 " style="height:214px;width:100%;">
+       <a href="?c=product&m=detail&id_laptop=<?php echo $laptop['id'];?>"><img src="public/images/<?php echo $laptop['images'];?>" style="width: 180px;height: 220px;"></a>
+      </div>
+      <hr style="color: #ddd;height: 2px;">
+      <div class="PD2" ">
+      <a href="?c=product&m=detail&id_laptop=<?php echo $laptop['id'];?>"><p><?php echo $laptop['laptop_name'];?></p>
+      <h4><?php echo $laptop['gia'];?></h4>
+    <form style="display: inline-block;" method="POST" action="?c=cart&m=add&id_laptop=<?php echo $laptop['id'];?>">
+    <button type="submit" class="btn btn-danger" >Mua ngay</button>
+    </form>
+       <button class="btn btn-primary">Xem chi tiết</button>
+      </div>
+      </div>
   <?php endforeach; ?>
   <?php echo $data['page'];?>
 <?php endif;?>
+
 </div>
 </div>
 </body>

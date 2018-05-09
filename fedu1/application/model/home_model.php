@@ -81,6 +81,64 @@ class Home_model extends PDODriver
 		return $data;
 
 	}
+	public function getAllDataPhoneByKeyWord($key)
+	{
+		$data=[];
+		$key="%".$key."%";
+		$sql ="SELECT * FROM phone where  phone_name like :key  ";
+		$stmt = $this->db->prepare($sql);
+		if ($stmt) {
+			$stmt->bindPaRam(':key',$key,PDO::PARAM_STR);
+			if ($stmt->execute()) {
+				if ($stmt->rowCount()>0) {
+					$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+				}
+			}
+			$stmt->closeCursor();
+		}
+		return $data;
+
+	}
+	public function getAllDataLaptopByKeyWord($key)
+	{
+		$data=[];
+		$key="%".$key."%";
+		$sql ="SELECT * FROM laptop where  laptop_name like :key  ";
+		$stmt = $this->db->prepare($sql);
+		if ($stmt) {
+			$stmt->bindPaRam(':key',$key,PDO::PARAM_STR);
+			if ($stmt->execute()) {
+				if ($stmt->rowCount()>0) {
+					$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+				}
+			}
+			$stmt->closeCursor();
+		}
+		return $data;
+
+	}
+	public function getAllDataLByKeyWordLimit($key,$start,$limmit)
+	{
+		$data=[];
+		$key="%".$key."%";
+		$sql ="SELECT * FROM laptop,phone where laptop_name like :key and phone_name like :key  limit :start,:limmit";
+		$stmt = $this->db->prepare($sql);
+		if ($stmt) {
+			$stmt->bindPaRam(':key',$key,PDO::PARAM_STR);
+			$stmt->bindPaRam(':start',$start,PDO::PARAM_INT);
+			$stmt->bindPaRam(':limmit',$limmit,PDO::PARAM_INT);
+			if ($stmt->execute()) {
+				if ($stmt->rowCount()>0) {
+					$data = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+				}
+			}
+			$stmt->closeCursor();
+		}
+		echo "<pre>"; print_r($data);
+		die();
+		return $data;
+
+	}
 
     public function updateViewPhone($idPhone,$view,$table)
     {
@@ -162,8 +220,8 @@ class Home_model extends PDODriver
 			$sql="SELECT * FROM {$table} as a inner join hang_sx as b where a.id_sx=b.id and b.name like :hang_sx and gia>=:min and gia<=:max order by view";
 		}
 		$stmt = $this->db->prepare($sql);
-			if ($stmt) {
-
+			if ($stmt) 
+			{
 				$stmt->bindPaRam(':hang_sx',$hang_sx,PDO::PARAM_STR);
 				$stmt->bindPaRam(':min',$min,PDO::PARAM_INT);
 				$stmt->bindPaRam(':max',$max,PDO::PARAM_INT);
@@ -215,9 +273,53 @@ class Home_model extends PDODriver
 		}
 		return $data;
 	}
+	public function panigate($currentPage=-1,$key)
+	{
+	  $total = $this->getAllDataLByKeyWord($key);
+	  $totalRecord = count($total);
+	  $totalPage = ceil($totalRecord/3);
+	  if($currentPage <= 0) 
+	  {
+	   $currentPage =1;
+	  }elseif($currentPage > $totalPage)
+	  {
+	   $currentPage = $totalPage;
+	  }
+	  $start = ($currentPage -1) * 3;
+	   if ($totalRecord>0) {
+	   	$html  = '';
+	   $html .= "<div class='text-center huy32' ><nav aria-label='Page navigation text-center' style='background-color:white;'>";
+	   $html .= "<ul  >";
+	   $html .= "";
+
+	   $linkCurrent="?c=all&m=index&table=&page={page}";	     
+	   if($currentPage > 1 && $currentPage <= $totalPage)
+	      {
+	          $html .= "<li style='width:20px;'><a style='color:black;' href='".str_replace('{page}', ($currentPage-1), $linkCurrent)."' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>";
+	      }
+	    for($i=1;$i<=$totalPage;$i++)
+	     {
+	         $html .= "<li style='width:30px; background-color:black;border:1px solid #ddd; margin-right:5px;'><a href='".str_replace('{page}', $i, $linkCurrent)."'>".$i."</a></li>";
+	     }
+	    if($currentPage < $totalPage && $currentPage >= 1)
+	      {
+	         $html .= "<li style='width:0px'><a style='color:black;' href='".str_replace('{page}', ($currentPage+1), $linkCurrent)."' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>";
+	       }
+	      $html .= "</ul>";
+	      $html .= "</nav></div>";
+	   }
+	   if($totalRecord==0)
+	   {
+	   	$html  = '';
+	   $html .= "<h3 class='text-center' style='margin-top:50px'>Loại sản phẩm bạn muốn tìm hiện ko có.</h3>";
+	   }
+	     $phone= $this->getAllDataLByKeyWordLimit($key,$start,3);
+	     return array('pageHTML' => $html,
+	        'dataphone'=>$phone
+	      );
+	}
 	public function Fullpanigate($currentPage=-1,$table="",$hang_sx="",$sap_xep="",$min="",$max="")
 	{
-	  $total = $this->getAllDataTable($table,$hang_sx,$sap_xep,$min,$max);
 	  $total = $this->getAllDataTable($table,$hang_sx,$sap_xep,$min,$max);
 	  $totalRecord = count($total);
 	  $totalPage = ceil($totalRecord/3);
@@ -229,37 +331,44 @@ class Home_model extends PDODriver
 	   $currentPage = $totalPage;
 	  }
 	  $start = ($currentPage -1) * 3;
-	  $html  = '';
-	  $html .= "<nav aria-label='Page navigation'>";
-	  $html .= "<ul class='pagination phantrang' >";
-	  $html .= "";
-      if($hang_sx=="" && $sap_xep !=""   )
-      {
-        $linkCurrent="?c=all&m=index&table=".$table."&sap_xep=".$sap_xep."&min=".$min."&max=".$max."&page={page}";
-      }
-	  if ($sap_xep=="" && $hang_sx!=""  ) {
-	  	$linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."&min=".$min."&max=".$max."&page={page}";
-	  }
-	  if ($hang_sx=="" && $sap_xep==""   ) {
-	  	$linkCurrent="?c=all&m=index&table=".$table."&min=".$min."&max=".$max."&page={page}";
-	  }
-	  if ($hang_sx!="" && $sap_xep !="" ){
-	  	 $linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."&sap_xep=".$sap_xep."&min=".$min."&max=".$max."&page={page}";
-	  }
-	  if($currentPage > 1 && $currentPage <= $totalPage)
-	     {
-	         $html .= "<li style='list-style:none; display:inline-block; padding-left:25px;'><a href='".str_replace('{page}', ($currentPage-1), $linkCurrent)."' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>";
-	     }
-	   for($i=1;$i<=$totalPage;$i++)
-	    {
-	        $html .= "<li style='list-style:none; display:inline-block; padding-left:25px;'><a href='".str_replace('{page}', $i, $linkCurrent)."'>".$i."</a></li>";
-	    }
-	   if($currentPage < $totalPage && $currentPage >= 1)
-	     {
-	        $html .= "<li style='list-style:none; display:inline-block; padding-left:25px;'><a href='".str_replace('{page}', ($currentPage+1), $linkCurrent)."' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>";
+	   if ($totalRecord>0) {
+	   	$html  = '';
+	   $html .= "<div class='text-center huy32' ><nav aria-label='Page navigation text-center' style='background-color:white;'>";
+	   $html .= "<ul  >";
+	   $html .= "";
+	      if($hang_sx=="" && $sap_xep !="")
+	      {
+	        $linkCurrent="?c=all&m=index&table=".$table."&sap_xep=".$sap_xep."&min=".$min."&max=".$max."&page={page}";
 	      }
-	     $html .= "</ul>";
-	     $html .= "</nav>";
+	   if ($sap_xep=="" && $hang_sx!="") {
+	    $linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."&min=".$min."&max=".$max."&page={page}";
+	   }
+	   if ($sap_xep!="" && $hang_sx!="" ) {
+	    $linkCurrent="?c=all&m=index&table=".$table."&hang_sx=".$hang_sx."&sap_xep=".$sap_xep."&page={page}"; 
+	   }
+	   if ($hang_sx=="" && $sap_xep=="" ) {
+	    $linkCurrent="?c=all&m=index&table=".$table."&min=".$min."&max=".$max."&page={page}";
+	   }
+	   if($currentPage > 1 && $currentPage <= $totalPage)
+	      {
+	          $html .= "<li style='width:20px;'><a style='color:black;' href='".str_replace('{page}', ($currentPage-1), $linkCurrent)."' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>";
+	      }
+	    for($i=1;$i<=$totalPage;$i++)
+	     {
+	         $html .= "<li style='width:30px; background-color:black;border:1px solid #ddd; margin-right:5px;'><a href='".str_replace('{page}', $i, $linkCurrent)."'>".$i."</a></li>";
+	     }
+	    if($currentPage < $totalPage && $currentPage >= 1)
+	      {
+	         $html .= "<li style='width:0px'><a style='color:black;' href='".str_replace('{page}', ($currentPage+1), $linkCurrent)."' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>";
+	       }
+	      $html .= "</ul>";
+	      $html .= "</nav></div>";
+	   }
+	   if($totalRecord==0)
+	   {
+	   	$html  = '';
+	   $html .= "<h3 class='text-center' style='margin-top:50px'>Loại sản phẩm bạn muốn tìm hiện ko có.</h3>";
+	   }
 	     $phone= $this->allProduct($table,$hang_sx,$sap_xep,$min,$max,$start,3);
 	     return array('pageHTML' => $html,
 	        'dataphone'=>$phone

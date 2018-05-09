@@ -24,7 +24,7 @@ class Home extends MY_Controller{
 	{
 		$data=[];
 		$data['allDataPhone']=$this->_homeModel->getAllDataPhone();
-		$data['allDataLatop']=$this->_homeModel->getAllDataLatop();
+		$data['allDataLaptop']=$this->_homeModel->getAllDataLatop();
 		$header=[];
 		$header['title']="this is home";
 		$header['content']="this is home shopping book";

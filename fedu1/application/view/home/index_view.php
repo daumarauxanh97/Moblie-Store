@@ -175,21 +175,30 @@
       <a href="?c=all&m=index&table=phone&hang_sx=Asus">Asus</a>
     </li>
     <li>
-      <a href="">Giá từ thấp đến cao</a>
+      <a href="?c=all&m=index&table=phone&sap_xep=asc">Giá từ thấp đến cao</a>
     </li>
     <li>
-      <a href="">Giá từ cao đến thấp</a>
+      <a href="?c=all&m=index&table=phone&sap_xep=desc">Giá từ cao đến thấp</a>
     </li>
   </ul>
-    <a href="?c=all&m=index&loai_sp=phone"  style="float: right; margin-top: -50px;text-decoration: none;">Xem thêm.</a>
+    <a href="?c=all&m=index&table=phone"  style="float: right; margin-top: -50px;text-decoration: none;">Xem thêm.</a>
    </div>
 <div class="product-content row" style="width: 1200px;margin: auto;">
   <?php foreach($data['allDataPhone'] as $key => $phone): ?>
-      <div class="col-md-3 " style="display: inline-block;">
-      <a href="?c=product&m=detail&id_phone=<?php echo $phone['id'];?>"><img src="uploads/images/<?php echo $phone['images'];?>" style="width: 200px;height: auto;"></a>
-      <a href="?c=product&m=detail&id_phone=<?php echo $phone['id'];?>"><p><?php echo $phone['phone_name'];?></p>
+      <div class="col-md-3 " style="display: inline-block;min-height:380px;">
+      <div class="pd1 " style="height:214px;width:100%;">
+       <a href="?c=product&m=detail&id_phone=<?php echo $phone['id'];?>"><img src="uploads/images/<?php echo $phone['images'];?>" style="width: 200px;height: auto;margin-top: 5px;"></a>
+      </div>
+      <hr style="color: #ddd;height: 2px;">
+      <div class="PD2" ">
+       <h2><a href="?c=product&m=detail&id_phone=<?php echo $phone['id'];?>"><p style="color: "><?php echo $phone['phone_name'];?></p></h2>
       <h4><?php echo $phone['gia'];?></h4></a>
-    </div>
+    <form style="display: inline-block;" method="POST" action="?c=cart&m=add&id_phone=<?php echo $phone['id'];?>">
+    <button type="submit" class="btn btn-danger" >Mua ngay</button>
+    </form>
+       <button class="btn btn-primary">Xem chi tiết</button>
+      </div>
+      </div>
   <?php endforeach; ?>
 </div>
 </div>
@@ -221,23 +230,32 @@
       <a href="?c=all&m=index&table=laptop&hang_sx=Hp">Hp</a>
     </li>
     <li>
-      <a href="">Giá từ thấp đến cao</a>
+      <a href="?c=all&m=index&table=laptop&sap_xep=asc">Giá từ thấp đến cao</a>
     </li>
     <li>
-      <a href="">Giá từ cao đến thấp</a>
+      <a href="?c=all&m=index&table=laptop&sap_xep=desc">Giá từ cao đến thấp</a>
     </li>
   </ul>
-  <a href="?c=all&m=index&loai_sp=laptop"  style="float: right; margin-top: -50px;text-decoration: none;">Xem thêm.</a>
+  <a href="?c=all&m=index&table=laptop"  style="float: right; margin-top: -50px;text-decoration: none;">Xem thêm.</a>
  </div>
  </form>
 
  <div class="product-content row" style="width: 1200px;margin: auto;">
-    <?php foreach($data['allDataLatop'] as $key => $latop): ?>
-      <div class="col-md-3 " style="display: inline-block;">
-      <a href="?c=product&m=detail&id_laptop=<?php echo $latop['id'];?>"><img src="public/images/<?php echo $latop['images'];?>" style="width: 180px;height: 220px;"></a>
-      <a href="?c=product&m=detail&id_laptop=<?php echo $latop['id'];?>"><p><?php echo $latop['laptop_name'];?></p>
-      <h4><?php echo $latop['gia'];?></h4>
-    </div>
+    <?php foreach($data['allDataLaptop'] as $key => $laptop): ?>
+      <div class="col-md-3 " style="display: inline-block;min-height:380px;">
+      <div class="pd1 " style="height:214px;width:100%;">
+       <a href="?c=product&m=detail&id_laptop=<?php echo $laptop['id'];?>"><img src="public/images/<?php echo $laptop['images'];?>" style="width: 180px;height: 220px;"></a>
+      </div>
+      <hr style="color: #ddd;height: 2px;">
+      <div class="PD2" ">
+      <a href="?c=product&m=detail&id_laptop=<?php echo $laptop['id'];?>"><p><?php echo $laptop['laptop_name'];?></p>
+      <h4><?php echo $laptop['gia'];?></h4>
+    <form style="display: inline-block;" method="POST" action="?c=cart&m=add&id_laptop=<?php echo $laptop['id'];?>">
+    <button type="submit" class="btn btn-danger" >Mua ngay</button>
+    </form>
+       <button class="btn btn-primary">Xem chi tiết</button>
+      </div>
+      </div>
   <?php endforeach; ?>
   </div>
 
@@ -272,7 +290,7 @@
       <a href="">Chuột</a>
     </li>
   </ul>
-  <a href="?c=all&m=all&loai_sp=laptop"  style="float: right; margin-top: -50px;text-decoration: none;">Xem thêm.</a>
+  <a href=""  style="float: right; margin-top: -50px;text-decoration: none;">Xem thêm.</a>
  </div>
  </form>
 
