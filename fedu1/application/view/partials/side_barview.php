@@ -1,15 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title><?php echo $title; ?></title>
-	<meta charset="utf-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="public/js/range-slider.js"></script>
-  <style type="text/css">
-  </style>
-</head>
+<div class="col-md-4 well-sm sideB">
+            <div class="titlesideB"><span class="glyphicon glyphicon-th"> </span>
+                <h3 class="text-center pdh3">Truyện mới cập nhập</h>
+                </div>
+                <div class="">
+                    <div class="sideB-ctRight">
+                       <ul class="ulListstory_right">
+                        <?php foreach ($sidebar['getUpdate'] as $key => $value): ?>
+                        <li>
+                            <div class="divthumb"><a href="?c=details&id=<?php echo $value['id'] ?>" title="<?php echo $value['name_comic'] ?>"><img alt="<?php echo $value['images'] ?>" src="<?php echo IMG_PATH_UPLOAD.$value['images'] ?>" /></a></div>
+                            <div class="newsContent"><a class="tile" href="?c=details&id=<?php echo $value['id'] ?>" title="<?php echo $value['name_comic'] ?>"><?php echo $value['name_comic'] ?></a> 
+                                <?php $cut = explode(", ",$value['category']); ?>
+                                <span>Thể loại: 
+                                    <?php foreach ($cut as $key => $cut1): ?>
+                                        <a href="?c=action&m=category&cat=<?php echo $cut1 ?>" title="<?php echo $cut1 ?>"><?php echo $cut1 ?></a>, 
+                                     <?php endforeach ?>
+                                </span>
+                                 <span>Tác giả: <a href="?c=action&m=authors&author=<?php echo $value['name_author'] ?>" rel="nofollow" title="Thiên Tằm Thổ Đậu"><?php echo $value['name_author'] ?></a></span></div>
+                        </li>
+                        <?php endforeach ?>                       
+                    </ul>
+                </div>
+            </div>
+        </div>

@@ -40,7 +40,7 @@
       </div>
   <?php endforeach; ?>
   <?php foreach($data['laptop'] as $key => $laptop): ?>
-      <div class="col-md-4 " style="display: inline-block;min-height:380px;">
+      <div class="col-md-3 " style="display: inline-block;min-height:380px;">
       <div class="pd1 " style="height:214px;width:100%;">
        <a href="?c=product&m=detail&id_laptop=<?php echo $laptop['id'];?>"><img src="public/images/<?php echo $laptop['images'];?>" style="width: 200px;height: auto;margin-top: 5px;"></a>
       </div>

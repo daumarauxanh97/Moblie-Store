@@ -24,10 +24,10 @@
   	<div class="header-logo">
   		<a href="?c=home&m=index" style="text-decoration:none;"><h2 style="color: white;">Dienthoai.com.vn</h2></a>
   	</div>
-    <form class="" action="?c=search&m=keyWord" method="POST">
+    <form class="" action="?c=search" method="POST">
   	<div class="search" >
-      <input type="text" name="search"  class="text-search" style="width: 500px;height: 32px;border: 1px solid grey;" placeholder="Nhập tên điện thoại,máy tính,phụ kiện cần tìm">
-      <button type="submit" class="button-search" style="height: 32px;margin-top:20px;" name="btnSearch"><i class="fa fa-search" style="color: lightskyblue;"></i></button> 
+      <input type="text" name="search" id="search" class="text-search" value="" style="width: 500px;height: 32px;border: 1px solid grey;" placeholder="Nhập tên điện thoại,máy tính,phụ kiện cần tìm">
+      <button type="submit" class="button-search" style="height: 32px;margin-top:20px;" name="btnSearch" onclick="click()"><i class="fa fa-search" style="color: lightskyblue;"></i></button> 
       <button type=""></button>
     </div>
     </form> 
@@ -430,3 +430,11 @@
   </div>
 </form>
 </nav>
+<!-- <script>
+function click(){
+  var key = document.getElementById("search").value;
+  window.location.href();
+}
+      
+</script>
+ -->
